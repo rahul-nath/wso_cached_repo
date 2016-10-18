@@ -1,0 +1,22 @@
+<% if @searched %>
+  <article class="facebook-results">       
+    <section>
+      <% if @results.empty? %>
+        <br>
+        <% if @syntax_error %>
+          <h1 class="no-matches-found">Syntax error:</h1>
+          <%= @syntax_error.html_safe %>
+        <% elsif session[:facebook_query].nil? or session[:facebook_query].empty? %>
+        <% else %>
+          <h1 class="no-matches-found">
+            No matches were found.
+          </h1>
+        <% end %>
+      <% elsif ( (!session[:facebook_results_mode] or session[:facebook_results_mode] == "auto") and @results.size > 6 ) or session[:facebook_results_mode] == "list" %>
+        <%= render :partial => "list_view" %>
+      <% else %>
+        <%= render :partial => "grid_view" %>
+      <% end %>
+    </section>
+  </article>
+<% end %>

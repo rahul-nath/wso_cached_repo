@@ -1,0 +1,19 @@
+<% content_for :header do %>
+  <div class="page-head">
+    <h1><%= link_to @page_class.title, @page_class %></h1>
+    <ul>
+      <li>
+        <%= link_to "New #{@page_class.title} Post", eval("new_#{@page_class.name.underscore}_path") %>
+      </li>
+
+      <% [Announcement, Exchange, LostFound, Job, Ride].each do |bull_class| %>
+        <% unless bull_class == @page_class %>
+          <li><%= link_to bull_class.title,  bull_class %></li>
+        <% end %>
+      <% end %>
+    </ul>
+
+  </div>
+<% end %>
+
+<%= render template: "layouts/application" %>

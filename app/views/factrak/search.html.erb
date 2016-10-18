@@ -1,0 +1,61 @@
+<article class="factrak-home">       
+  <section class="margin-vertical-small">
+    <h3>Search Results for "<%= @query %>"</h3>
+    <% unless @profs.empty? %>
+      <br>
+      <h4>Professors</h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th class="unix-column">Unix</th>
+            <th>Office</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @profs.each do |p| %>
+            <% user = User.find_by_unix_id(p.unix_id) %>
+            <% if user %>  <!-- prof without unix probably doesn't exist anymore... -->
+              <tr>
+                <td>
+                  <%= link_to user.name_string, [:factrak, p] %>
+                </td>
+                <% if p.unix_id and user.email%>       
+                  <td><%= mail_to user.email, p.unix_id %></td>
+                <% end %>
+                <% if user.room_string %>
+                  <td><%= user.room_string %></td>
+                <% end %>
+              </tr>
+            <% end %>
+          <% end %>
+        </tbody>
+      </table> 
+    <% end %>
+  </section>
+  <% unless @courses.empty? %>
+    <section class="margin-vertical-small">
+      <h4>Courses</h4>
+      <table>
+        <thead>
+          <tr>
+            <th class="col-20">Course</th>
+            <th class="col-80">Professors</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @courses.sort {|x,y| x.number <=> y.number}.each do |c| %>
+            <tr>
+              <td class="col-20"><%= link_to c, [:factrak, c] %> </td>
+              <td class="col-80">
+                <% c.professors.each do |p| %>
+                  <%= link_to p.name, [:factrak, c, prof: p] %>
+                <% end %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table> 
+    </section>
+  <% end %>
+</article>

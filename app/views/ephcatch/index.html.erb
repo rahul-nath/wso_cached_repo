@@ -1,0 +1,22 @@
+<article class="facebook-results">
+  <section>
+    <div class="grid-wrap">
+      <% @seniors.each do |senior| %>
+      <aside> <!-- Profile Module -->
+        <div class="third">
+          <div class="profile-photo">
+            <%= link_to facebook_pic(senior.unix_id, 105, 135),
+            ephcatches_path(id: senior.id),
+            method: :post,
+            remote: true %>
+          </div>
+        </div>
+        <div class="two-thirds">
+          <%= senior.name %>
+        </div>
+      </aside>
+      <% end %>
+    </div>
+
+  </section>
+</article>

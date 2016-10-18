@@ -1,0 +1,139 @@
+/* Factrak
+ ************************************************/
+.factrak {
+  .factrak-home {
+    @extend %container;
+    .factrak-prof-comments {
+      margin-top: 2em;
+    }
+    section {
+      @include span-columns(10);
+      @include shift(1);
+      // Tablet
+      @include media($medium-screen) {
+	@include span-columns(8);
+	@include shift(0);
+      }
+      // Phone
+      @include media($small-screen) {
+	@include span-columns($ss-full);
+      }
+      h3 {
+	color: $purple;
+      }
+    } //end section
+  } // end factrak-home
+
+  // Professor Profile (most of this is in _facebook.scss)
+  #factrak-comments-section {
+    margin-bottom: 4em;
+  }
+
+  .autocomplete {
+    position: relative;
+    margin-top: 0px;
+    width: 100%;
+    @include span-columns(8);
+    // Tablet
+    @include media($medium-screen) {
+      @include span-columns(5);
+    }
+    // Phone
+    @include media($small-screen) {
+      @include span-columns($ss-full);
+    }
+    #suggestions {
+      width: 100%;
+      top: -1.5em;
+      // Tablet
+      @include media($medium-screen) {
+	width: 82.6%;
+      }
+      // Phone
+      @include media($small-screen) {
+	width: 100%;
+	top: -4.8em;
+      }
+    }
+  }
+
+  // For all autocomplete boxes
+  #suggestions, #factrak_dept_suggestions, #factrak_course_num_suggestions {
+    position: absolute;
+    cursor: pointer;
+    td {
+      padding: 0 .5em;
+    }
+    a {
+      display: block;
+    }
+  }
+
+  // Survey stuff
+  #factrak_survey_table {
+    border: none;
+  }
+  .survey_course_name {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    vertical-align: middle;
+    input {
+      display: inline;
+    }
+    #dept_abbrev, #course_num {
+      width: 48%;
+      vertical-align: middle;
+      margin-bottom: 0;
+    }  
+    #factrak_dept_suggestions, #factrak_course_num_suggestions {
+      width: 48%;
+      top: 1.75em;
+      td {
+        border: 2px solid $light-gray;
+      }
+      tr:nth-child(even) {
+        background-color: lighten($light-gray, 10%);
+      }
+      // the rest is above
+    }
+  }
+  #open-survey {
+    cursor: pointer;
+    color: $purple;
+    &:hover { cursor: pointer; }
+  }
+
+  #survey-hider {
+    margin-bottom: 0px;
+    margin-top: 3px;
+    padding:	1px;
+    text-align: left;
+  }
+
+  #submit-survey {
+    float: right;
+  }
+  
+  #factrak_survey_factrak_course_id {
+    width: 4em;
+    padding: 0em;
+    display: inline;
+    border: 2px solid rgba(0, 0, 0, 0.15);
+    border-radius: 0.1875em;
+    box-sizing: border-box;
+  }
+
+  #factrak-survey-table {
+    tr, td {
+      background: none;
+      padding: 0 .5em;
+      border: none;
+    }
+  }
+
+  .factrak-flag {
+    color: red;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,24 @@
+<% content_for :header do %>
+
+  <% content_for :body_class, "facebook" %>
+  <div class="page-head">
+    <h1><%= link_to "Facebook", "/facebook" %></h1>
+    <ul>
+      <li><%= link_to "Search", "/facebook" %></li>
+      <li><%= link_to "Help", facebook_help_path %></li>
+      
+      <% if current_user %>
+	<li>
+          <%= link_to "View", current_user %>
+	</li>
+	<li><%= link_to "Edit", facebook_edit_path %></li>
+	<% if false && current_user.ephcatch? %>
+	  <li><%= link_to "Ephcatch", "/facebook/ephcatch" %></li>
+	<% end %>
+      <% end %>
+    </ul>
+  </div>
+
+  <%= render "shared/search" %>
+<% end %>
+<%= render template: "layouts/application" %>

@@ -1,0 +1,8 @@
+<!-- doesn't work... don't know why -->
+<% content_for :head do %>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta>
+<% end %>
+
+<% content_for :body_class, "announcement" %>
+
+<%= render template: "layouts/application" %>

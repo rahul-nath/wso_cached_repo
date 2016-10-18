@@ -1,0 +1,12 @@
+/**
+ * This handles marking comments as flagged.
+ */
+
+// Get the span wrapping the flag notification
+var el = document.getElementById("<%= @id %>flagged");
+// Set the red exclamation point as its inner html
+el.innerHTML = "&#10071;";
+
+// Now remove the link to flag this review
+el = document.getElementById("flag<%= @id %>");
+el.innerHTML = "";

@@ -1,0 +1,10 @@
+number,floor,single_or_double,faces,area,common_room_access
+91,1,s,"s,e",195,1
+92,1,s,"s,w",155,1
+95,1,d,"n,w",260,1
+96,1,s,"n,e",165,1
+101,2,d,"s,e",165,0
+102,2,s,s,130,0
+103,2,s,"s,w",180,0
+104,2,s,"n,w",145,0
+105,2,s,"n,e",150,0

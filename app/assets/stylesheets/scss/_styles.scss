@@ -1,0 +1,202 @@
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  @include box-sizing(border-box);
+  font: inherit;
+  vertical-align: baseline;
+  @include transition(all .33s ease-in-out);
+}
+
+html {
+  font-size: 100%;
+  min-height: 100%;
+  position: relative;
+}
+
+body {
+  color: $black;
+  display: block;
+  height: 100%;
+  margin: 0 0 6em; //footer height
+  background: $base-body-color;
+  -webkit-text-smoothing: antialiased;
+  font-smoothing: antialiased;
+}
+
+em {
+  font-style: italic;
+}
+
+strong, b, .label {
+  font-weight: bold;
+}
+
+sup {
+  vertical-align: super;
+}
+
+.right {
+  float: right;
+}
+
+.left {
+  float: left;
+}
+
+.hidden {
+  display: none;
+}
+
+h1, h2, h3, h4 {
+  color: $purple;
+}
+
+.liga {
+  font-style: italic;
+  -moz-font-feature-settings: "liga=1, dlig=1";
+  -ms-font-feature-settings: "liga", "dlig";
+  -webkit-font-feature-settings: "liga", "dlig";
+  -o-font-feature-settings: "liga", "dlig";
+  font-feature-settings: "liga", "dlig";
+}
+
+.container {
+  @extend %container;
+}
+
+// Article Pieces
+article {
+  @extend %container;
+  min-height: 1px; //prevent collapse
+  @include clearfix();
+}
+
+// Section
+section {
+  padding-top: 4em;
+  margin-bottom: 4em;
+  min-height: 1px; // prevent collapse
+  @include clearfix;
+  @include media($small-screen) {
+    padding-top: 4em;
+    margin-bottom: 2em;
+  }
+}
+
+.margin-vertical-small {
+  padding-top: 1em;
+  padding-bottom: 0em;
+  margin-bottom: 0em;
+}
+
+// Avatar
+.avatar {
+  width: 30px;
+  height: 30px;
+  position: relative;
+  overflow: hidden;
+  top: 10px;
+  @include br(15px);
+  img {
+    width: 30px;
+    height: auto;
+    bottom: 5px;
+    position: relative;
+  }
+}
+
+// Comments
+.comment {
+  $comment-gutter: 1.4em;
+  $comment-image-padding: 0em;
+  $comment-image-width: 6em;
+  $comment-color: $base-font-color;
+  $comment-background: lighten($base-accent-color, 15);
+  $comment-detail-color: transparentize($comment-color, .5);
+  $comment-image-vert-alignment: top;
+
+  display: table;
+  width: 100%;
+  margin-bottom: $base-line-height;
+  padding-bottom: 1em;
+  border-bottom: 1px solid transparentize($comment-color, .9);
+
+  .comment-image,
+  .comment-content {
+    display: table-cell;
+    vertical-align: $comment-image-vert-alignment;
+  }
+
+  .comment-image {
+    padding-right: $comment-gutter;
+
+    > img {
+      width: $comment-image-width;
+      height: auto;
+      border-radius: $base-border-radius;
+      padding: $comment-image-padding;
+      background: $comment-background;
+      display: block;
+      max-width: none;
+    }
+
+    .comment-reverse-order & {
+      padding-right: 0;
+      padding-left: 10px;
+    }
+  }
+
+  .comment-content {
+    width: 100%;
+
+    h1 {
+      font-size: 1em;
+      margin-bottom: .5em;
+    }
+
+    p {
+      margin-bottom: .5em;
+    }
+
+    p.comment-detail {
+      font-style: italic;
+      font-size: .9em;
+      color: $comment-detail-color;
+    }
+  }
+}
+
+
+// This and #error_explanation should probably be unified
+#errors {
+  color: red;
+  padding: 0.5em;
+  margin-bottom: 2em;
+  ul li {
+    @extend %error-list-items;
+  }
+}
+
+#error_explanation {
+  color: red;
+  border: 2px solid red;
+  width: 450px;
+  max-width: 100%; // handles mobile view
+  padding: 0.5em;
+  margin-bottom: 2em;
+  background-color: $light-gray;
+  h2 {
+    text-align: left;
+    font-weight: bold;
+    padding: 5px 5px 5px 15px;
+    font-size: $base-font-size-small;
+    margin: -7px;
+    margin-bottom: 0;
+    background-color: #c00;
+    color: $white;
+  }
+  ul li {
+    @extend %error-list-items;
+  }
+}

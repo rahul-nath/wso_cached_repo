@@ -1,0 +1,131 @@
+/* Typography */
+%all-caps {
+  font-size: $base-font-size-small;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+%small-caps {
+  font-variant: small-caps;
+  font-weight: bold;
+  color: $medium-gray;
+}
+
+%align-right {
+  text-align: right;
+}
+
+// Used by bulletins and searches
+%not-found {
+  color: #ccc;
+  text-align: center;
+}
+
+// Used by #errors and #error_explanation (see _styles.scss)
+%error-list-items {
+  font-size: $base-font-size-small;
+  list-style: square;
+  margin-left: 2em;
+}
+
+// Prevents long words from extending past the container
+// Used by Factrak and Bulletins
+%break-long-words {
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  -ms-word-break: break-all;
+  word-break: break-all;
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+/* Site Architecture */
+%container {
+  @include outer-container();
+  padding: 0 .5rem;
+  // Big Screens
+  @include media($huge-screen) {
+    padding: 0;  
+  }
+  // Tablet
+  @include media($medium-screen) {
+    padding: 0 1rem;  
+  }
+}
+
+// Full Width Divs
+%full-width {
+  width: 100%;
+  min-height: 1px;
+  display: block;
+}
+
+// Results Tables (bulletins & facebook-results)
+%results-table {
+  @extend %container;
+  section {
+    padding-top: 0em;
+    @include span-columns(10);
+    @include shift(1);
+    // Tablet
+    @include media($medium-screen) {
+      @include span-columns(8);
+      @include shift(0);
+    }
+    // Phone
+    @include media($small-screen) {
+      @include span-columns($ss-full);
+    }
+  }
+}
+
+/* Grid Items */
+%grid-item {
+  @include span-columns(6);
+  @include omega(2n);
+  margin-bottom: 2em;
+  @include br(4px);
+  // Bordered List Styling
+  @extend %bordered-list;    
+  
+  // Tablet
+  @include media($medium-screen) {
+    @include span-columns(4);
+    @include omega(2n);
+  }
+  // Phone
+  @include media($small-screen) {
+    @include span-columns($ss-full);
+  }
+}
+
+%grid-item-2n {
+  @include span-columns(6);
+  @include omega(2n);
+  margin-bottom: 2em;
+  @include br(4px);
+  // Bordered List Styling
+  @extend %bordered-list;    
+  
+  // Tablet
+  @include media($medium-screen) {
+    @include span-columns(8);
+  }
+  // Phone
+  @include media($small-screen) {
+    @include span-columns($ss-full);
+    margin-bottom: 1em;
+  }
+}
+
+/* Buttons */
+%button {
+  @include button(flat, $base-accent-color);
+  font-size: $base-font-size;
+}

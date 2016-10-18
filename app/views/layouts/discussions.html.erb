@@ -1,0 +1,17 @@
+<% content_for :head do %>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta>
+<% end %>
+
+<% content_for :body_class, "announcement" %>
+
+<% content_for :header do %>
+  <div class="page-head">
+    <h1>Discussions<b style="vertical-align:super; font-size:30px;">BETA</b></h1>
+  <ul>
+    <li><%= link_to "Home", "/discussions" %></li>
+    <li><%= link_to "New", new_discussion_path %></li>
+    <li><%= link_to "Old forum", "http://wso.williams.edu/discuss" %></li>
+  </ul>
+</div>
+<% end %><!-- end :header -->
+<%= render template: "layouts/application" %>

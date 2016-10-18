@@ -1,0 +1,120 @@
+<% max = 3 %>
+
+<article class="dorm-ranks">
+  <h3>Rankings</h3>
+  
+  <table>
+    <tr> 
+      <th>Max Mean Single Size</th>
+      <th>Min Mean Single Size</th>
+    </tr>
+
+    <% Dorm.order_biggest_singles.first(max).
+        zip(Dorm.order_smallest_singles.first(max)).each do |a, b| %>
+      <tr>
+      	<td><%= link_to a.name, [:dormtrak, a] %> <br>
+  	     (<%= a.average_single_area %> sq. ft.)
+        </td> 
+	      <td><%= link_to b.name, [:dormtrak, b] %> <br>
+	       (<%= b.average_single_area %> sq. ft.)
+       </td>
+      </tr>
+    <% end %>
+  </table>
+  
+  <table>
+    <tr> 
+      <th>Biggest Singles</th>
+      <th>Smallest Singles</th> 
+    </tr>
+
+    <% DormRoom.trakked.singles.biggest.first(max).
+        zip(DormRoom.trakked.singles.smallest.first(max)).each do |a, b| %>
+      <tr>
+        <td>
+          <%= link_to "#{a.dorm.name} #{a.number}", [:dormtrak, a.dorm] %>
+          <br> 
+          (<%= a.area %> sq. ft.)
+        </td> 
+        <td>
+          <%= link_to "#{b.dorm.name} #{b.number}", [:dormtrak, b.dorm] %>
+          <br> 
+          (<%= b.area %> sq. ft.)
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  
+  <table>
+    <tr> 
+      <th>Max Mean Double Size</th>
+      <th>Min Mean Double Size</th> 
+    </tr>
+
+    <% Dorm.order_biggest_doubles.first(max).
+        zip(Dorm.order_smallest_doubles.first(max)).each do |a, b| %>
+      <tr>
+        <td>
+  	      <%= link_to a.name, [:dormtrak, a] %>
+  	      <br> 
+  	      (<%= a.average_double_area %> sq. ft.)
+        </td> 
+        <td>
+          <%= link_to b.name, [:dormtrak, b] %>
+  	      <br>
+          (<%= b.average_double_area %> sq. ft.)
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  
+  <table>
+    <tr> 
+      <th>Biggest Doubles</th>
+      <th>Smallest Doubles</th> 
+    </tr>
+
+    <% DormRoom.trakked.doubles.biggest.first(max).
+        zip(DormRoom.trakked.doubles.smallest.first(max)).each do |a, b| %>
+      <tr>
+        <td>
+          <%= link_to "#{a.dorm.name} #{a.number}", [:dormtrak, a.dorm] %>
+          <br>
+          (<%= a.area %> sq. ft.)
+        </td>         
+        <td>
+          <%= link_to "#{b.dorm.name} #{b.number}", [:dormtrak, b.dorm] %>
+          <br>
+          (<%= b.area %> sq. ft.)
+        </td>
+      </tr>
+    <% end %>
+  </table>
+  
+  <table>
+    <tr> 
+      <th>Most Singles</th>
+      <th>Most Doubles</th> 
+    </tr>
+
+    <% Dorm.most_singles.first(max).zip(Dorm.most_doubles.first(max)).each do |a, b| %>
+      <tr>
+        <td><%= link_to a.name, [:dormtrak, a] %><br> (<%= a.number_singles %>)</td> 
+        <td><%= link_to b.name, [:dormtrak, b] %><br> (<%= b.number_doubles %>)</td>
+      </tr>
+    <% end %>
+  </table>
+  
+  <table>
+    <tr> 
+      <th>Most bathrooms</th> <th>Fewest bathrooms</th> 
+    </tr>
+    <% Dorm.most_bathrooms.take(max).zip(Dorm.fewest_bathrooms.take(max)).each do |a, b| %>
+      <tr>
+        <td><%= link_to a.name, [:dormtrak, a] %><br> (<%= a.bathroom_ratio.round(2) %>:1)</td>
+        <td><%= link_to b.name, [:dormtrak, b] %><br> (<%= b.bathroom_ratio.round(2) %>:1)</td>
+      </tr>
+    <% end %>
+  </table>
+
+</article>

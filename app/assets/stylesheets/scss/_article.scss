@@ -1,0 +1,161 @@
+/* Article Pages (About, FAQ, anything with extensive writing)
+ * 
+ * currently used by: About, Facebook Help, Factrak Policy, Listserv,
+ * Dormtrak Policy & Survey, Login (/account/login)
+ *
+ * assumes page structure: <div class="article"><section><article>
+ * allows for: article-masthead (aka banner), code (aka monospace text)
+ */
+
+/* Article Content */
+.article {
+  .about-header {
+    position: absolute;
+    bottom: .25em;
+    text-shadow: 0 2px 1px rgba(0,0,0,.5);
+
+    // Phone
+    @include media($small-screen) {
+      position: relative;
+      color: $black;
+      padding-top: 6em; 
+      text-shadow: none;
+      padding: 0 2em;
+    } 
+    // header titles (within masthead)
+    h5 {
+      font-weight: 600;
+    }
+    h1, h5 {
+      @include span-columns(8);
+      @include shift(1);
+      @include clearfix;
+      overflow: hidden;
+      color: $white;
+      // Tablet
+      @include media($medium-screen) {
+        @include span-columns(8);
+        @include shift(0);
+        @include clearfix;
+      }
+      // Phone
+      @include media($small-screen) {
+        @include span-columns($ss-full);
+        @include shift(0);
+        @include clearfix;
+        color: $purple;
+      } 
+    }
+  }
+  
+  /* Body Area */
+  // Section
+  section {
+    @extend %container;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    @include media($medium-screen) {
+      margin-bottom: 4em;
+    }
+
+    @include media($small-screen) {
+      padding: 0;
+    }
+  }
+  // Article
+  article {
+    @include span-columns(10);
+    @include shift(1);
+  }
+  // Tablet
+  @include media($medium-screen) {
+    @include span-columns(8);
+    @include shift(0);
+    padding: 0 2em;
+  }
+  // Phone
+  @include media($small-screen) {
+    @include span-columns($ss-full);
+    @include shift(0);
+    padding: 0;
+  } 
+  
+  // Paragraphs
+  h1, h2, h3, h4, {
+    color: $purple;
+    font-style: normal;
+  }
+  // Intro paragraph has larger font
+  .intro-paragraph {
+    font-size: $base-font-size * 1.25;
+    line-height: 1.33em;
+  }
+  // Links
+  a {
+    text-decoration: none;
+    @include dots(#d4d4e4);
+    color: $purple;
+    &:visited {
+      border-bottom: none;
+    }
+  }
+  
+  // If you want to have a "code" font
+  .code {
+    font-family: monospace;
+    font-size: $base-font-size * 1.25;
+  }
+
+  // If the code is going to be used inline with normal text, the
+  // parent container should use this class
+  .inline-display-text {
+    * {
+      float: left;
+    }
+  }
+
+  // If you want to display the code in its own line
+  pre {
+    overflow: auto;
+    padding-bottom: .3em;
+  }
+  
+} /* End .article */
+
+// About Page Banner
+.about-banner {
+  @include outer-container;
+  @include vertical-align;
+  vertical-align: center;
+  height: 20rem;
+  position: relative;
+  overflow: hidden;
+  margin-top: 10em;
+  
+  @include media($medium-screen) {
+    margin-top: 5em;
+    height: 10rem;
+  }
+
+  // Phone
+  @include media($small-screen) {
+    height: 10rem;
+    margin-top: 8em;
+    img {
+      display: none;
+    }
+  }
+}
+
+.about-section {
+  position: relative;
+  top: -8em;
+
+  @include media($medium-screen) {
+    top: -3em;
+  }
+
+  @include media($small-screen) {
+    padding: 0;
+  }
+}

@@ -1,0 +1,64 @@
+<%= will_paginate rooms, :page_links => false %>
+<% rooms.each do |r| %>
+<strong>
+  <%= r.number %> (<%= r.single? ? 's' : 'd' %>)<br>
+</strong>
+
+
+
+<% if !r.picture.nil? %>
+  <%= link_to "(Photo)", "/room-pics/#{@dorm.name} r.number.jpeg" %>
+<% end %>
+
+      <div id="<%= r.number %>">
+        <% if r.walkthrough? %>
+          (Walkthrough double)<br>
+        <% end %>
+
+	<small><strong>Floor</strong></small>: 
+	   <% if r.floor_number == 0 %>
+	     Basement
+	   <% else %>
+	     <%= r.floor_number %>
+	   <% end %><br>
+
+        <small><strong>Area</strong></small>: 
+	<%= r.area %> sq. ft. <br>
+        <% ["faces", "noise", "closet", "flooring"].each do |attr|%>
+           <% if !r[attr].nil? %>
+             <small><strong><%= attr.titleize %></strong></small>: 
+    	     <%= r[attr] %><br>
+ 	   <% end %>
+        <% end %>
+	
+      <% if !r.bed_adjustable.nil? %>
+        <small><strong>Adjustable bed</strong></small>:
+           <% if r.bed_adjustable? %>
+  	     Yes <br>
+  	   <% elsif r.bed_adjustable.nil? %>
+	     Unavailable <br>
+	   <% else %>
+	      No <br>
+	   <% end %>
+     <% end %>
+
+      <small><strong>Common room</strong></small>: 
+         <% if r.common_room_access? %>
+	    Yes. 
+	    <% if !r.common_room_desc.nil? && !r.common_room_desc.empty? %>
+	       <%= r.common_room_desc %><br>
+	    <% end %>
+	 <% else %>
+	    No <br>
+	 <% end %>
+
+      <% if r.private_bathroom? %>
+         <small><strong>Private bathroom</strong></small>: Yes. 
+         <% if r.bathroom_desc? %>
+	   <%= r.bathroom_desc %>
+	 <% end %>
+      <% end %>
+
+    </div><br>
+<% end %>
+<%= will_paginate rooms, :page_links => false %>

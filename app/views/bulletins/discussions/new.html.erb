@@ -1,0 +1,22 @@
+<article class="list-creation">
+  <section>
+    <% if @thread.errors.any? || @post.errors.any? %>
+      <div id="error_explanation">
+        <b><%= pluralize(@thread.errors.count + @post.errors.count, "error") %>:</b>
+        <ul>
+          <% [@thread, @post].each do |thing| %>
+            <% thing.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <%= form_for(@post) do |f| %>
+      <%= f.text_field :title, :placeholder => "Title" %>
+      <%= f.text_area :content, :placeholder => "Body" %>
+      <%= f.submit "Submit", class: "submit" %>
+    <% end %>
+  </section>
+</article>

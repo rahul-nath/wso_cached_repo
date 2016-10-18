@@ -1,0 +1,139 @@
+<strong>* Indicates a required field</strong>
+<br><br>
+
+<% room = current_user.dorm_room %>
+<% dorm = room.dorm %>
+
+
+<%= form_for(@review) do |f| %>
+  <% if @review.errors.any? %>
+    <div>
+      <%= pluralize(@review.errors.count, "error") %>
+      <ul>
+	<% @review.errors.full_messages.each do |msg| %>
+	  <li><%= msg %></li>
+	<% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <% if room.capacity.nil? %>
+    <strong>*Single or double?</strong><br>
+    Single <%= f.radio_button :capacity, 1 %>
+    Double <%= f.radio_button :capacity, 2 %>    
+    <br>
+  <% end %>
+
+  <% if dorm.key_or_card.nil? %>
+    <strong>*Do you get in the room by keypad/card, or physical key?</strong>
+    <br>
+    Keypad/Card  <%= f.radio_button :key_or_card, "Keypad/card" %>
+    Physical key <%= f.radio_button :key_or_card, "Physical key" %>
+    <br>
+  <% end %>
+
+  <% if room.closet.nil? %>
+    <strong>*What was the closet like?</strong><br>
+    (size, shelving, wardrobe vs. built-in)<br>
+    <%= f.text_field :closet %>
+    <br>
+  <% end %>
+
+  <% if room.flooring.nil? %>
+    <strong>*What material was the flooring?</strong></br>
+    <% ["Tile", "Wood", "Carpet", "Other"].each do |ans| %>
+      <%= ans + " "%> <%= f.radio_button :flooring, ans %>
+    <% end %>
+    <br><br>
+  <% end %>
+
+  <strong>*Private bathroom?</strong><br>
+  Yes <%= f.radio_button :private_bathroom, 1 %>
+  No  <%= f.radio_button :private_bathroom, 0 %>
+  <br>
+
+  <strong>If you answered yes to the above, could you give a quick description
+    of the bathroom?</strong><br>
+  (what things it has, quirks, etc)<br>
+  <%= f.text_area :bathroom_desc, rows: 2, cols: 40 %>
+  <br><br>
+
+  <strong>*Do you have a common room?</strong><br>
+  (Readily accessible and on the same floor as you)<br>
+  Yes <%= f.radio_button :common_room_access, 1 %>
+  No  <%= f.radio_button :common_room_access, 0 %>
+  <br>
+
+  <% if room.common_room_desc.nil? %>
+    <strong>If you answered yes to the above, could you give a quick
+      description of the common room?</strong><br>
+    (e.g. furniture, whether it was shared with another suite, etc.)<br>
+    <%= f.text_field :common_room_desc %>
+  <% end %>
+  <br>
+  
+  <% if room.thermostat_access.nil? %>
+    <strong>*Is there a functional AND accessible thermostat?</strong><br>
+    Yes <%= f.radio_button :thermostat_access, 1 %>
+    No  <%= f.radio_button :thermostat_access, 0 %>
+    <br><br>
+  <% end %>
+
+  <strong>*Was the bed adjustable?</strong><br>
+  (without risers you brought)<br>
+  Yes <%= f.radio_button :bed_adjustable, 1 %>
+  No  <%= f.radio_button :bed_adjustable, 0 %>
+  <br><br>
+
+  <strong>How good was wifi?</strong><br>
+  (1 is the worst, 5 is the best)<br>
+  <% ['1','2','3','4','5'].each do |ans| %>
+    <%= ans + " " %><%= f.radio_button :wifi, ans %>
+  <% end %>
+  <br><br>
+
+  <strong>Rate the loudness of this dorm:</strong><br>
+  (1 is the quietest, 5 is the loudest)<br>
+  <% ['1','2','3','4','5'].each do |ans| %>
+    <%= ans + " " %> <%= f.radio_button :loudness, ans %>
+  <% end %>
+  <br>
+
+  <strong>What are the main causes of the noise?</strong><br>
+  <%= f.text_area :noise, cols: 40, rows: 2 %>
+
+  <strong>How convenient was the location?</strong><br>
+  (1 is the worst, 5 is the best)<br>
+  <% ['1','2','3','4','5'].each do |ans| %>
+    <%= ans + " " %><%= f.radio_button :location, ans %>
+  <% end %>
+  <br><br>
+
+  <strong>Rate your overall satisfaction with your living situation
+    this year:</strong><br>
+  (1 is the worst, 5 is the best)<br>
+  <% ['1','2','3','4','5'].each do |ans| %>
+    <%= ans + " " %><%= f.radio_button :satisfaction, ans %>
+  <% end %>
+  <br><br>
+
+  <strong>General commentary on <%= dorm.name %> itself:</strong><br>
+  (not your room!)<br>
+  <% if !@review.comment.nil? %>
+    <% placeholder = @review.comment %>
+  <% else %>
+    <% placeholder = "Share your thoughts, likes, dislikes, things to be aware of, etc..." %>
+  <% end %>
+  <%= f.text_area(:comment, placeholder: placeholder, rows: 5, cols: 40 ) %>
+  <br><br>
+
+  <strong>*Anonymous?</strong><br>
+  (this will hide your common room  and noise comments, if any, until next 
+  schoolyear)<br>
+  Yes <%= f.radio_button :anonymous, 1 %>
+  No <%= f.radio_button :anonymous, 0, :checked => true %>
+  <br><br>
+
+  <%= f.submit "Save" %>
+
+<% end %>

@@ -1,0 +1,167 @@
+/* Bulletins
+ * - currently does not include discussions
+ * - list creation pages (see below) also used by facebook edit
+ */
+.lost-found, .announcement, .jobs, .rides {
+  // Header
+  header {
+    padding-top: 4em;
+    padding-bottom: 0;
+    // Title Area
+    .page-head {
+      @include span-columns(10);
+      @include shift(1);
+      margin-bottom: 4em;
+      // Tablet
+      @include media($medium-screen) {
+	@include span-columns(8);
+	@include shift(0);   
+      }
+      // Phone
+      @include media($small-screen) {
+	@include span-columns($ss-full);
+	margin-bottom: 3em;
+      } 
+      // Page Links
+      @extend %link-list;
+      // a couple tweaks to the list
+      ul li {
+	margin-right: 3em;
+	// Phone
+	@include media($small-screen) {
+	  margin-right: 2em;
+	}
+      }
+    }
+  }
+  h1 {
+    font-weight: lighter;
+    color: $purple;
+    margin-bottom: 1rem;
+  }
+
+  .main-table {
+    @extend %results-table;
+  }
+
+  .no-posts {
+    @extend %not-found;
+  }
+
+  .comment h5 {
+    @extend %break-long-words;
+  }
+}
+
+/* List Creation Pages
+ * - also used by facebook edit
+ */
+.list-creation {
+  @extend %container;
+  section {
+    @include span-columns(10);
+    @include shift(1);
+    padding: 1.5em;
+    // Tablet 
+    @include media($medium-screen) {
+      @include span-columns(8);
+      @include shift(0);
+    }
+    // Phone
+    @include media($small-screen) {
+      @include span-columns($ss-full);
+    }
+    h3 {
+      color: $purple;
+    }
+    // because for some reason '@extend %border-wrap;' doesn't work
+    border: 2px solid $base-border-color;
+    @include br($border);
+    margin-top: $base-line-height;
+    @include media($small-screen) {
+      padding: 0;
+      border: none;
+    }
+  }
+  .category {
+    display: none;
+    &:checked ~ label {
+      background: $purple;
+      color: white;
+    }
+  }
+  .category + label {
+    @extend %button;
+    background: white;
+    @include boxshade(0px, 0px, 0px, 2px, $purple, inset);
+    padding: 10px 0px;
+    width: 200px;
+    @include br(2px);
+    text-align: center;
+    color: $purple;
+    letter-spacing: 1px;
+    font-weight: bold;
+    display: inline-block;
+    cursor: pointer;
+  }
+  h4 {
+    margin: .7em 0;
+  }
+  textarea {
+    display: block;
+    height: 20em;
+  }
+
+  .field {
+    @extend %break-long-words;
+  }
+
+  .submit {
+    float: right;
+    @include button($purple);
+    width: 200px;
+    text-align: center;
+  }
+}
+
+// Discussions
+.small-font {
+  font-size: $base-font-size-small;
+}
+
+.discussion-thread {
+  @extend %container;
+  margin-top: 1em;
+  @include media($small-screen) { 
+    padding: 0; 
+  }
+
+  article {
+    @include span-columns(10);
+    @include shift(1);
+    // Tablet
+    @include media($medium-screen) {
+      @include span-columns(8);
+      @include shift(0);  
+      padding: 0 2em;
+    }
+    // Phone
+    @include media($small-screen) {
+      @include span-columns($ss-full);
+      @include shift(0); 
+      padding: 0 2em; 
+    } 
+  }
+
+  #discussions-comments-section {
+    margin-top: 0;
+  }
+
+  .reply {
+    width: 75%;
+  }
+
+  h5, .comment-content {
+    @extend %break-long-words;
+  }
+}

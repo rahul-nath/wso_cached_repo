@@ -1,0 +1,28 @@
+<section class="discussion-thread">
+  <article>
+  <h5><b><%= @thread.title %></b></h5>
+  <section id="discussions-comments-section" class="margin-vertical-small">
+
+    <% if @posts.any? %>
+      <!-- OP comment -->
+      <%= render "post", p: @posts.first %>
+      <!-- Children of this comment -->
+      <% @posts[1..-1].each do |p| %>
+      <%= render "post", p: p %>
+      <% end %>
+    <% end %>
+  </section>
+
+  <!-- Reply -->
+  <strong>Reply</strong>
+  <div class="reply">
+    <%= form_for(@reply, remote: true) do |f| %>
+      <%= f.hidden_field :discussion_id, value: @thread.id %>
+      <%= f.text_area :content %>
+
+      <div id="errors"></div>
+      <%= f.submit "Submit" %>
+    <% end %>
+  </div>
+</article>
+</section>

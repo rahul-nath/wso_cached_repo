@@ -1,0 +1,25 @@
+<article class="facebook-profile">
+  <section class="margin-vertical-small">
+    <h3>Moderation</h3>
+
+    <% @flagged.each do |f| %>
+       <div class="comment" id="comment<%= f.id %>">
+	 <div>
+	   <span>
+	     <%= link_to(f.professor.name, f.professor) %>
+	     <%= link_to(f.course.to_s, [:factrak, f.course]) %>
+	     (+<%= f.agreements.find_all { |a| a.agrees? }.length %>,
+	     -<%= f.agreements.find_all { |a| !a.agrees? }.length %>)
+	   </span>
+	   <p><%= f.comment %></p>
+	   <%= link_to("Unflag", "/factrak/unflag?id=" + f.id.to_s,
+	       :remote => true) %>
+	   ..........
+	   <%= link_to("Delete", factrak_survey_path(f), :method => :delete,
+ 	       :remote => true, :confirm => "Are you sure?") %>
+	 </div>
+       </div>
+    <% end %>
+
+  </section>
+</article>

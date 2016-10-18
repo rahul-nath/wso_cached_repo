@@ -1,0 +1,30 @@
+<article class="main-table">
+  <section class="margin-vertical-small">
+    <% @threads.each do |t| %>
+    <div class="comment">
+      <h5>
+        <b><%= link_to t.title, t %></b>
+      </h5>
+      <div class="small-font">
+        Started <%= time_ago_in_words(t.created_at) %> by 
+        <%= t.user ? t.user.name : t.ex_user_name %>
+      </div>
+      <div class="small-font">
+        <span>Posts: <b><%=t.children.count%></b></span>
+        <% if t.children.any? %>
+          | Last post was <%= time_ago_in_words(t.last_active) %> 
+          ago by 
+          <% last = t.children[-1] %>
+          <%= last.user ? last.user.name : last.ex_user_name %>
+        <% end %>
+      </div>
+      <% if current_user.admin? %>
+        <div>
+          <%= link_to "[CLOSE]", t, method: :delete, confirm: "Are you sure?" %>            
+        </div>
+      <% end %>
+    </div>
+    <% end %>
+    <%= will_paginate @threads %>
+  </section>
+</article>

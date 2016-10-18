@@ -1,0 +1,3 @@
+var id = "p<%= @post.id %>";
+var com = document.getElementById(id);
+com.innerHTML = "<%= j render 'edit', p: @post %>";

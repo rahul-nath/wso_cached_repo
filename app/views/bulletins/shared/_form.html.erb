@@ -1,0 +1,65 @@
+<% content_for :body_class, "announcement" %>
+
+<article class="list-creation">
+  <section>
+    <%= form_for @bulletin do |f| %>
+      <% if @bulletin.errors.any? %>
+        <div id="error_explanation">
+          <b><%= pluralize(@bulletin.errors.count, "error") %> prohibited this from being saved:</b>
+
+          <ul>
+            <% @bulletin.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <% if @bulletin.is_a? Ride # Display source and dest fields %>
+        <div class="field">
+          <%= f.label :offer do %>
+            <%= f.check_box :offer %>
+            I'm offering this ride
+          <% end %>
+        </div>
+
+        <div class="field">
+          <h5><%= f.label :source %></h5>
+          <%= f.text_field :source %></h5>          
+        </div>
+
+        <div class="field">
+          <h5><%= f.label :destination %></h5>
+          <%= f.text_field :destination %></h5>
+        </div>
+      <% else # Display title field for everything but rides %>
+        <div class="field">
+          <h5><%= f.label :title %></h5>
+          <%= f.text_field :title %>
+        </div>
+      <% end %>
+
+      <% if [Announcement, Ride].include? @bulletin.class %>
+        <div class="field">
+        
+          <% if @bulletin.is_a? Announcement %>
+            <h5><%= f.label :show_my_post_starting_on %></h5>
+          <% elsif @bulletin.is_a? Ride %>
+            <h5><%= f.label :date %></h5>
+          <% end %>
+
+          <%= f.text_field :start_date, 
+              value: @bulletin.try(:start_date).try(:strftime,'%b %d, %Y'),
+              placeholder: Date.today.strftime("%b %d") %>
+        </div>
+      <% end %>
+
+      <div class="field">
+        <h5><%= f.label :message %></h5>
+        <%= f.text_area :body %>
+      </div>
+
+      <%= f.submit 'Submit', :class => 'submit' %>
+    <% end %>
+  </section>
+</article>

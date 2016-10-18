@@ -1,0 +1,68 @@
+// Typography
+///////////////////////////////////////////////////////////////////////////////
+$sans-serif: "Source Sans Pro", $helvetica, "Arial", sans-serif;
+$serif: "Volkorn", "Baskerville", $georgia, serif;
+
+$base-font-family: $sans-serif;
+$header-font-family: $base-font-family;
+
+// Sizes
+///////////////////////////////////////////////////////////////////////////////
+$base-font-size: 1em;
+$base-font-size-small: .75em;
+$base-line-height: $base-font-size * 1.5;
+$base-border-radius: em(3);
+
+// Colors
+///////////////////////////////////////////////////////////////////////////////
+
+// Cool
+
+$purple: #6F4993;
+$aqua:  #7FDBFF;
+$blue:  #0074D9;
+$navy:  #001F3F;
+$blue-black: #282e42;
+$teal:  #39CCCC;
+
+// Warm
+
+$yellow:  #FFDC00;
+$orange:  #FF851B;
+$fuchsia: #F012BE;
+$maroon:  #85144B;
+
+// Ebony and Ivory
+$black:  #111;
+$white: darken(white, 1%);
+
+// Bitters
+$dark-gray: lighten($black, 20%);
+$medium-gray: lighten($black, 60%);
+$light-gray: #d9d9d9;
+$light-red: #FBE3E4;
+$light-yellow: #FFF6BF;
+$light-green: #E6EFC2;
+
+/* Neutrals */
+$off-white: darken(#ffffff, 1%);
+
+// Body Color
+$base-body-color: $off-white;
+
+//  Font Colors
+$base-font-color: $dark-gray;
+$base-accent-color: $purple;
+
+//  Text Link Colors
+$base-link-color: $base-accent-color;
+$hover-link-color: darken($base-accent-color, 10%);
+
+// Border color
+$base-border-color: rgba(0,0,0,.15);
+$border: 2px;
+
+// Flash Colors
+$error-color: $light-red;
+$notice-color: $light-yellow;
+$success-color: $light-green;

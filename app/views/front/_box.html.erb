@@ -1,0 +1,18 @@
+<aside>
+  <h5><%= link %></h5>  
+  <ul>
+    <% bulls.each do |b| %>
+      <li>
+        <div class="box-item-div">
+          <div class="list-left">
+            <%= link_to b.title, b %>
+          </div>
+
+          <span class="list-date">
+            <%= time_if_today_else_date b.show_date %>
+          </span>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+</aside>

@@ -1,0 +1,14 @@
+// Neat Breakpoints
+///////////////////////////////////////////////////////////////////////////////
+
+@import "neat/neat-helpers"; // or "neat-helpers" when in Rails
+
+$small-screen: new-breakpoint(max-width em(540) 4);
+$medium-screen: new-breakpoint(max-width em(760) 8);
+$large-screen: new-breakpoint(min-width em(920) 12);
+$huge-screen: new-breakpoint(min-width em(1087) 12);
+
+// Small Screen #'s
+$ss-full: 4;
+$ss-half: 2;
+$ss-qt: 1;

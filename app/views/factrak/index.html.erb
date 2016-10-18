@@ -1,0 +1,26 @@
+<!-- use the dormtrak layout for the front page of dormtrak -->
+<article class="dormtrak">
+  <div class="container">
+
+    <aside class="sidebar">
+      <article class="home">
+        <h3>Departments</h3>
+        <ul id="dept_list">
+          <% @areas.each do |area| %>
+            <li><%= link_to area.name, [:factrak, area] %></li>
+          <% end %>
+        </ul>
+      </article>
+    </aside>
+
+    <article class="main">
+      <section class="lead">
+        <h3>Recent Comments</h3>
+        <br>
+        <% @comments.each do |comment| %>
+          <%= render 'factrak/shared/comment', comment: comment, show_prof: true, abridged: true %>
+        <% end %>
+      </section>
+    </article>
+  </div>
+</article>

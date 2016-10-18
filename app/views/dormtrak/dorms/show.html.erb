@@ -1,0 +1,77 @@
+<!-- This will jump down past the header -->
+
+<% unless flash[:notice] %>
+  <% if params[:number].nil? %>
+    <script>
+      $(function() {
+        $(document).scrollTop( $("#<%= @dorm.name %>").offset().top );  
+      });
+    </script>
+  <% else %>
+    <script>
+      $(function() {
+        $(document).scrollTop( $("#roomstop").offset().top );  
+      });
+    </script>
+  <% end %>
+<% end %>
+
+<div class="container">
+
+<aside class="sidebar">
+  <section>
+    <%= render 'facts' %>
+  </section>
+
+  <hr>
+  
+  <section class="building-rooms">
+    <h3 id="roomstop">Rooms</h3>
+    <small>
+      <strong>
+	<%= link_to "Floorplan", "/floorplans/#{@dorm.name}.pdf" %>
+      </strong>
+      (Courtesy of OSL)
+    </small>
+    <br>
+    <% if @dorm.dorm_rooms.any? %>
+       <%= render 'rooms', rooms: @dorm.dorm_rooms.paginate(page: params[:page], per_page: 15) %>
+    <% else %>
+       No room-level information yet!
+  <% end %>
+</aside>
+
+<article class="main">
+  <section class="lead">
+
+    <a id="<%= @dorm.name %>"></a>
+    <h2><%= @dorm.name %></h2>
+    <div>
+      <%= photo_for(@dorm) %>
+    </div>
+
+    <strong>Summary</strong>
+    <p><%= @dorm.description %></p>
+  </section>
+
+    <section>
+      <% if current_user.student? && current_user.dorm == @dorm %>
+        <% unless current_user.has_reviewed_room_in_dorm?(@dorm) %>
+          <strong>
+    	      <%= link_to "Fill out survey", new_dormtrak_review_path %>
+          </strong>
+        <% end %>      
+      <% end %>
+
+      <% if @dorm.dormtrak_reviews.count > 0 %>
+        <%= render 'dormtrak/shared/recent_comments' %>
+      <% elsif current_user.student? && current_user.dorm == @dorm %>
+         None yet. Be the first!
+      <% else %>
+         None yet.
+      <% end %>
+    </section>
+</article>  
+</div>
+
+

@@ -1,0 +1,228 @@
+/* This covers elements that Facebook, Factrak, & Dormtrak share.
+ * 
+ * includes: header, search, and results table
+ */
+
+.facebook, .factrak, .dormtrak {
+  // Header
+  header {
+    padding-top: 4em;
+    padding-bottom: 0;
+    // Title Area
+    .page-head {
+      @include span-columns(11);
+      @include shift(1);
+      margin-bottom: 4em;
+      // Tablet
+      @include media($medium-screen) {
+        @include span-columns(8);
+        @include shift(0);   
+      }
+      // Phone
+      @include media($small-screen) {
+        @include span-columns($ss-full);
+        margin-bottom: 3em;
+      } 
+      // Page Links
+      @extend %link-list;
+      // a couple tweaks to the list
+      ul li {
+        margin-right: 3em;
+        // Phone
+        @include media($small-screen) {
+          margin-right: 2em;
+        }
+      }
+
+      // *** For some reason, this wasn't displaying in Facebook & Factrak
+      a {
+	color: $purple;
+      }
+    }
+    // home page h1
+    h1 {
+      font-weight: lighter;
+      color: $purple;
+      margin-bottom: 1rem;
+    }
+
+  }
+  
+  // Search
+  .facebook-search, .factrak-search, .dormtrak-search {
+    @include span-columns(10);
+    @include shift(1);
+    // Tablet
+    @include media($medium-screen) {
+      @include span-columns(8);
+      @include shift(0);
+    }
+    // Phone
+    @include media($small-screen) {
+      @include span-columns($ss-full);
+    }
+  }
+
+  // Results Table
+  .facebook-results, .facebook-profile, {
+    @extend %results-table;
+  }
+
+  .no-matches-found {
+    @extend %not-found;
+  }
+
+
+  /****** Grid View *****/
+  %border-wrap {
+    border: 2px solid $base-border-color;
+    @include br($border);
+    padding: 1em;
+    margin-top: $base-line-height;
+    @include media($small-screen) {
+      padding: 0;
+      border: none;
+    }
+  }
+  .grid-wrap {
+    padding-top: 1em;
+    @include span-columns(12);
+    
+    // Grid Cards
+    aside {
+      @extend %grid-item-2n;
+      background: $white;
+      border: 2px solid $base-border-color;
+      padding: 1em;
+      font-size: $base-font-size-small;
+      letter-spacing: 1px;
+      font-weight: bold;
+      // Tablet
+      @include media($medium-screen) {
+        font-size: $base-font-size;
+      }
+      // Phone
+      @include media($small-screen) {
+        font-size: $base-font-size-small;
+        padding: 1em;
+      }
+      // Split the Grid Card
+      .third {
+        @include span-columns(4);
+        position: relative;
+        // Tabelt
+        @include media($medium-screen) {
+          @include span-columns(4);
+        }
+        // Phone
+        @include media($small-screen) {
+          font-size: $base-font-size-small;
+          @include span-columns(1);
+        }
+      }
+      
+      // Second Third of Grid Card
+      .two-third {
+        @include span-columns(8);
+        @include omega;
+        // Tablet
+        @include media($medium-screen) {
+          @include span-columns(4);
+        } 
+        // Phone
+        @include media($small-screen) {
+          @include span-columns(3);
+        }
+
+
+        // Student Names
+        h4 {
+          display: block;
+          @extend .h4;
+          padding-bottom: 0;
+          margin-bottom: $base-line-height/2;
+          @include media($small-screen) {
+            margin-bottom: $base-line-height/4;
+          }
+        }
+        
+        // Lists
+        ul {
+          display: inline-block;
+	  padding: 0;
+	  margin: 0;
+          &:last-of-type {
+            padding-left: $base-line-height;
+          }
+          list-style: none;
+          list-style-type: none;
+          // List Items
+          li {
+            padding: 0;
+            background: none;
+            border: none;
+            box-shadow: none;
+            display: block;
+            margin-bottom: $base-line-height/4;
+            // Phone
+            @include media($small-screen) {
+              margin-bottom: $base-line-height/8;
+              line-height: $base-font-size;
+            }
+            &:last-child {
+              margin-bottom: 0;
+            }
+          }
+        }
+      }
+      
+      // Profile Photo     
+      .profile-photo {
+        height: em(180);
+        width: em(180);
+        // Tablet
+        @include media($medium-screen) {
+          height: em(180);
+          width: em(180);
+        }
+        // Phone
+        @include media($small-screen) {
+          height: em(100);
+          width: em(100);
+        }
+        
+        @include br($border);
+        margin-right: $base-line-height;
+      }
+      
+      // List Headers (Left Column)
+      .list-headers {
+        //@extend %align-right;
+        @extend %all-caps;
+        font-size: $base-font-size;
+        color: $light-gray;
+        // Tablet
+        @include media($medium-screen) {
+          font-size: $base-font-size;
+        }
+      }
+
+      // List Contents (Right Column)
+      .list-contents {
+        //@extend %align-right;
+        @extend %all-caps;
+        font-size: $base-font-size;
+	padding: 0;
+        //color: $light-gray;
+        // Tablet
+        @include media($medium-screen) {
+          font-size: $base-font-size;
+        }
+      }
+    }
+  }
+
+  .comment-content {
+    @extend %break-long-words;
+  }
+}

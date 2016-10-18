@@ -1,0 +1,50 @@
+<% unless flash[:notice] %>
+  <script>
+    $(function() {
+       $(document).scrollTop( $("#begin-policy").offset().top );  
+    });
+  </script>
+<% end %>
+
+<div class="article">
+  <section><article>
+    
+    <h3>Policy</h3>
+    <br>
+
+    <p>To create a forum where students can openly and honestly share their 
+      opinions of their professors in a manner that is anonymous and only 
+      visible to other students.  This feedback is primarily designed to help 
+      other students find courses and professors which are the best matches 
+      for them.
+    </p>
+
+    <p>While factrack is designed to be as open as possible, inappropriate 
+      comments will not be tolerated, and comments can be removed or edited at 
+      the discretion of the student moderator to bring them into accordance 
+      with this policy.  Inappropriate comments include, but are not limited 
+      to, comments that name other students, that contain racial or ethnic 
+      slurs, and those that harass others.  Users may flag comments for 
+      moderator review using the button at the bottom of each comment.  Use 
+      this if you feel the comment has violated the acceptable use policy.
+    </p>
+
+    <p>By using Factrak users agree to abide by this policy. The use of 
+      Factrak is also governed by the 
+      <a href="http://wso.williams.edu/about#policy">wider WSO policy</a> and 
+      the <a href="http://oit.williams.edu/w/?u=docs/Computing+Ethics+and+Responsibilities">
+	OIT Computing Ethics and Responsibilities Statement</a>.
+    </p>
+
+    <% if current_user.has_accepted_factrak_policy? %>
+      <p> You have already accepted the Factrak policy.</p>
+    <% else %>
+      <%= form_tag(:action => :accept_policy) do %>
+        <p><%= check_box_tag :accept %> I agree to the Factrak policy.</p>
+        <%= submit_tag :continue %>
+      <% end %>
+    <% end %>
+
+    </article>
+  </section>
+</div>

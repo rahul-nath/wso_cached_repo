@@ -1,0 +1,69 @@
+/*
+ * Styling that is specific for Dormtrak. This includes the classes
+ * "sidebar" and "main", which are also being used by Factrak
+ */
+
+.dormtrak {
+  .container section {
+      padding-top: 0;
+      padding-bottom: 0;
+      margin-bottom: .5em;
+  }
+  .sidebar {
+    @include span-columns(4);
+    @extend %border-wrap;
+    @include shift(1);
+    margin-bottom: 4em;
+    // Tablet
+    @include media($medium-screen) {
+      @include shift(0);
+    }
+    // Phone
+    @include media($small-screen) {
+      @include shift(0);
+    }
+
+    // For the rankings on the main page
+    .dorm-ranks {
+	th {
+	    border: 2px solid $light-gray;
+	}
+    }
+    
+    // For building pages
+    // (used in show.html.erb)
+    .fact-table {
+	margin: 0;
+    }
+
+    // *** not sure why this wasn't showing before
+    .building-rooms a {
+	color: $purple;
+    }
+
+    // For room reviews
+    section div {
+      @extend %break-long-words;
+    }
+  }
+  .main {
+    @include span-columns(6);
+    @include shift(0);
+    @include omega();
+    @extend %border-wrap;
+    margin-bottom: 4em;
+    // Tablet
+    @include media($medium-screen) {
+      @include shift(1);
+    }
+    // Phone
+    @include media($small-screen) {
+      @include shift(1);
+    }
+  }
+}
+
+#piechart {
+  width: 50%;
+  height: 50%;
+}

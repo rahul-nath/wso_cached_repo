@@ -1,0 +1,172 @@
+body {
+  color: $base-font-color;
+  font-family: $base-font-family;
+  font-size: $base-font-size;
+  -webkit-font-smoothing: antialiased;
+  line-height: $base-line-height;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $header-font-family;
+  line-height: 1.25em;
+  text-rendering: optimizeLegibility; // Fix the character spacing for headings
+  &.article {
+    margin: .25em 0;
+  }
+}
+
+
+h1, h2, h3 {
+  font-weight: lighter;
+}
+
+h4, h5, h6 {
+  font-weight: normal;
+}
+
+.article {
+  h4, h5, h6 {
+    font-style: italic;
+  }
+}
+
+h1, .h1 {
+  font-size: $base-font-size * 4; // 16 * 3 = 64px
+  // Phone
+  @include media($small-screen) {
+    font-size: $base-font-size * 3; // 16 * 3 = .48px
+  } 
+}
+
+h2, .h2 {
+  font-size: $base-font-size * 4; // 16 * 2 = 48px
+  // Phone
+  @include media($small-screen) {
+    font-size: $base-font-size * 2.25; // 16 * 3 = 36px
+  }
+}
+
+h3, .h3 {
+  font-size: $base-font-size * 2.25; // 16 * 1.75 = 36px
+  // Phone
+  @include media($small-screen) {
+    font-size: $base-font-size * 1.5; // 16 * 3 = 24px
+  }
+}
+
+h4, .h4 {
+  font-size: $base-font-size * 1.5; // 16 * 1.5 = 24px
+  // Phone
+  @include media($small-screen) {
+    font-size: $base-font-size * 1.25; // 16 * 3 = 20px
+  }
+}
+
+h5, .h5 {
+  font-size: $base-font-size * 1.25; // 16 * 1.25 = 20px
+  @include media($small-screen) {
+    font-size: $base-font-size; // 16 * 3 = 20px
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: bold;
+  }
+}
+
+h6, .h6 {
+  font-size: $base-font-size;
+  // Phone
+  @include media($small-screen) {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+}
+
+p {
+  margin: 0 0 ($base-line-height * .5);
+}
+
+small {
+  font-size: $base-font-size *.75;
+  font-variant: small-caps;
+  font-weight: bold;
+  
+}
+
+a {
+  text-decoration: none;
+  @include transition(all 0.4s ease-in-out);
+
+  &:hover {
+    opacity: .6;
+    @include transition(all 0.2s ease-in-out);
+
+  }
+
+  &:active, &:focus {
+    color: $hover-link-color;
+    outline: none;
+  }
+}
+
+article a {
+  text-decoration: none;
+  @include transition(all 0.4s ease-in-out);
+  color: $purple;
+
+  &:hover {
+    opacity: .6;
+    @include transition(all 0.2s ease-in-out);
+  }
+
+  &:active, &:focus {
+    color: darken($purple, 10);
+    outline: none;
+  }
+}
+
+hr {
+  border-bottom: 2px solid $base-border-color;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  margin: $base-line-height 0;
+}
+
+img {
+  margin: 0;
+  max-width: 100%;
+}
+
+abbr, acronym {
+  border-bottom: 1px dotted $base-border-color;
+  cursor: help;
+}
+
+address {
+  display: block;
+  margin: 0 0 ($base-line-height / 2);
+}
+
+hgroup {
+  margin-bottom: $base-line-height / 2;
+}
+
+del {
+  color: lighten($base-font-color, 15);
+}
+
+blockquote {
+  border-left: 2px solid $base-border-color;
+  color: lighten($base-font-color, 15);
+  margin: $base-line-height 0;
+  padding-left: $base-line-height / 2;
+}
+
+cite {
+  color: lighten($base-font-color, 25);
+  font-style: italic;
+
+  &:before {
+    content: '\2014 \00A0';
+  }
+}

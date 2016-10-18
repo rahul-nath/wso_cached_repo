@@ -1,0 +1,30 @@
+<h3>Recent Comments</h3>
+<br>
+
+<% if @reviews && @reviews.any? %>
+  <% @reviews.each do |r| %>
+    <div class="comment">
+      <% if @abridged %>
+        <div class="comment-image">
+          <%= small_avatar_for(r.dorm) %>
+        </div>
+      <% end -%>
+      <div class="comment-content">
+        <% if @abridged %>
+          <h1><%= link_to r.dorm.name, [:dormtrak, r.dorm] %></h1>
+        <% end %>
+        <p>
+          <%= @abridged ? r.comment.truncate(200) : r.comment %>
+        </p>
+        <p class="comment-detail">
+          Posted <%= time_ago_in_words(r.created_at) %> ago.</p>
+        <p class="comment-detail">
+          <% if current_user.student? && current_user.can_edit_review(r) %>
+            <%= link_to "edit", edit_dormtrak_review_path(r) %>
+            ||<%= link_to " delete", r, method: :delete, data: { confirm: "Are you sure you want to delete your review?" } %>
+          <% end %>
+        </p>
+      </div>
+    </div>
+  <% end %>
+<% end %>

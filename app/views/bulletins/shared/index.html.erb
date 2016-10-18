@@ -1,0 +1,40 @@
+<% content_for :head do %>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"></meta>
+<% end %>
+
+<% content_for :body_class, "announcement" %>
+
+<article class="main-table">
+  <section>
+    <% if @bulletins.empty? %>
+      <h1 class="no-posts">No Posts</h1>
+    <% else %>
+      <table>
+        <thead>
+          <tr>
+            <th class="col-60">Summary</th>
+            <th class="col-6020">Posted by</th>
+            <th class="col-20">Date Posted</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @bulletins.each do |bulletin| %>
+            <tr>
+              <td class="col-60">
+                <%= link_to bulletin.title, bulletin %>
+                <% if current_user.try(:owns?, bulletin) %>
+                  [ <%= link_to 'Edit', [:edit, bulletin] %>
+                  | <%= link_to "Delete", bulletin_path(bulletin), method: :delete, data: { confirm: "Are you sure?" } %>
+                  ]
+                <% end %>
+              </td>
+              <td class="col-20"><%= bulletin.user.name %></td>
+              <td class="col-20"><%= bulletin.start_date.strftime('%B %d, %Y') %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <%= will_paginate @bulletins %>
+    <% end %>
+  </section>
+</article>

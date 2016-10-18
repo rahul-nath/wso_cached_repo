@@ -1,0 +1,5 @@
+git init
+git add .
+git commit -m "pushing"
+git remote add origin git@github.com:rahul-nath/wso_cached_repo.git
+git push -u origin master

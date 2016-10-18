@@ -1,0 +1,97 @@
+/*
+ * Homepage
+ */
+.home {
+  // Header
+  header {
+    padding-top: 3em;
+    padding-bottom: 2em;
+    // Phone
+    @include media($small-screen) {
+      padding-bottom: 4em;
+    } 
+    // home page h1
+    h1 {
+      font-weight: lighter;
+      text-align: center;
+      margin-bottom: 3rem;
+      color: $purple;
+      font-size: $base-font-size * 4;
+      @include media($small-screen) {
+	margin-bottom: 3rem;
+      }
+    }
+  }  
+
+  // Section
+  article section {
+    @include row;
+    padding-top: 3em;
+    margin-bottom: 8em;
+    // Phone
+    @include media($small-screen) {
+      padding-top: 0;
+      padding-bottom: 0;
+    } 
+  }
+  
+  // Modular Box
+  article aside {
+    @include span-columns(4);
+    @include omega(3n);
+    background: $white;
+    margin-bottom: 2em;
+    @include br(4px);
+    // Bordered List Styling
+    @extend %bordered-list;    
+    // Tablet
+    @include media($medium-screen) {
+      @include span-columns(4);
+      @include omega(2n);
+    }
+    // Phone
+    @include media($small-screen) {
+      @include span-columns($ss-full);
+    }
+    h5 a {
+      color: $white;
+      &:hover {
+	color: $white;
+      }
+    }
+    .box-item-div {
+      overflow: hidden;
+      position: relative;
+      height: 100%;
+    }
+
+    .list-left {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 70%;
+      // Tablet
+      @include media($medium-screen) {
+        max-width: 66%;
+      }
+      // Phone
+      @include media($small-screen) {
+        max-width: 80%;
+      }
+    }
+
+    .list-date {
+      display: block;
+      background: $white;
+      padding-left: 5px;
+      position: absolute;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      font-variant: small-caps;
+      font-weight: bold;
+      color: $medium-gray;
+    }
+  }
+}

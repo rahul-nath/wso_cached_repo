@@ -1,0 +1,28 @@
+<% content_for :header do %>
+  
+  <div class="page-head">
+    <h1>Login</h1>
+    <ul>
+      <li><a href="https://pchanger.williams.edu/pchecker/">Forgot My Password</a></li>
+    </ul>
+  </div>
+  <!-- Search Block -->
+  <%= form_tag( {:controller => "account", :class => "login", :action => "login"}) do %>
+    <%= hidden_field_tag :dest, params[:dest] %>
+    
+    <strong>Notice:</strong>
+    Some users are still being imported and won't be able to log in just yet
+    
+    <% if flash[:login_message] %>
+      <div class="form-message">
+        <small class="error"><%= flash[:login_message] %></small>
+      </div>
+    <% end %>
+    
+    <%= text_field_tag :username, params[:username], placeholder: "Enter your unix", autofocus: true %>
+    <%= password_field_tag :password, "", placeholder: "Password" %>
+    <%= submit_tag "Login", class: "submit", type: "submit" %>
+    
+  <% end %>
+  </div>
+<% end %>

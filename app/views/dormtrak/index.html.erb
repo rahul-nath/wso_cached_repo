@@ -1,0 +1,29 @@
+<div class="container">
+  <aside class="sidebar">
+    <%= render 'rankings' %>
+  </aside>
+
+  <article class="main">
+    <section class="lead">
+      <h3>Welcome to Dormtrak</h3>
+      <p>Dormtrak is a system where students can 
+      <%= link_to "anonymously", dormtrak_policy_path %> 
+      share their thoughts about dorm buildings and rooms, as well as find out
+      everything there is to know about housing at Williams.
+      Much of our information is pulled from surveys that students fill
+      out, so by filling out the survey for your building, you help all of us 
+      make the most informed decision we can about where to live.
+      <% if current_user.try(:dorm_room) %>
+        <% unless r = current_user.has_reviewed_room? %>
+          <strong>To fill out the survey, click <%= link_to "here", new_dormtrak_review_path %></strong>.
+         <% else %>
+          You've already filled out a survey this year, but you can click <%= link_to 'here', edit_dormtrak_review_path(r) %> to edit it.
+	      <% end %>
+      <% end %>
+      </p>
+    </section>
+    <section>
+      <%= render 'dormtrak/shared/recent_comments' %>
+    </section>
+  </article>
+</div>

@@ -1,0 +1,37 @@
+<!-- only render header if person has accepted policy -->
+<% if current_user && current_user.has_accepted_factrak_policy? %>
+
+  <% content_for :header do %>
+    <%= javascript_include_tag "factrak" %>
+
+    <% content_for :body_class, "factrak" %>
+
+    <div class="page-head">
+      <h1><%= link_to "Factrak", "/factrak" %> </h1>
+
+      <ul>
+        <li><%= link_to "Home", "/factrak" %></li>
+        <li><%= link_to "Policy", "/factrak/policy" %></li>
+        <li><%= link_to "Your Reviews", "/factrak/surveys" %></li>
+        <% if current_user.factrak_admin? %>
+        <li><%= link_to "Moderate", "/factrak/moderate" %></li>
+        <% end %>
+      </ul>
+    </div>
+
+    <!-- Search Block -->
+    <%= form_tag :action => 'search', :controller => '/factrak' do %>
+      <%= search_field_tag :search, params[:search], placeholder: "Search for a professor or course", onkeyup: "factrakAutocomplete();", onfocus: "showSuggestions();", style: "margin-bottom: 0px", autocomplete: :off %>
+      <%= submit_tag "Search", class: "submit" %>
+      <div class="autocomplete">
+        <table id="suggestions">
+        </table>
+      </div>
+    <% end %>
+    
+    <!-- Search Toggles -->
+  <% end %>
+
+<% end %><!-- end accept policy conditional display-->
+
+<%= render template: "layouts/application" %>

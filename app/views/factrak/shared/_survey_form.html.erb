@@ -1,0 +1,114 @@
+<!-- Note that this is submitted via ajax, hence the "remote: true" -->
+
+
+<div id="errors">
+  <% @survey.errors.full_messages.each do |msg| %>
+    <p>*<%= msg %></p>
+  <% end %>
+</div>
+
+<%= form_for(@survey) do |f| %>
+
+<%= f.hidden_field :professor_id, value: @prof.id %>
+
+<table id="factrak-survey-table">
+  <tr>
+    <td align="left"><strong>What course is this for?*</strong></td>
+    <td align="left">
+      <div class="survey_course_name">
+        <%= f.text_field :aos_abbrev, placeholder: "DEPT", onkeyup: "factrakDeptAutocomplete()", autocomplete: :off %>
+        <table id="factrak_dept_suggestions"></table>
+        <%= f.text_field :course_num, placeholder: "NUMBER", autocomplete: :off %>
+      </div>
+    </td>
+  </tr>  
+  
+  <tr>
+    <td align="left"><strong>Would you recommend this course to a friend?</strong></td>
+    <td align="left">
+      Yes <%= f.radio_button :would_recommend_course, true %>
+      No  <%= f.radio_button :would_recommend_course, false %>
+    </td>
+  </tr>
+
+  <tr>
+    <td align="left"><strong>Would you take another course with this professor?</strong></td>
+    <td align="left">
+      Yes <%= f.radio_button :would_take_another, true %>
+      No  <%= f.radio_button :would_take_another, false %>
+    </td>
+  </tr>
+
+  <tr>
+    <td align="left"><strong>How does the workload compare to other courses you've taken?</strong></td>
+    <td align="left">
+      <% ['1','2','3','4','5','6','7'].each do |ans| %>
+      <%= ans %> <%= f.radio_button :course_workload, ans %>
+      <% end %>
+    </td>
+  </tr>
+
+  <tr>
+    <td align="left"><strong>How intellectually stimulating did you find the course?</strong></td>
+    <td align="left">
+      <% ['1','2','3','4','5','6','7'].each do |ans| %>
+      <%= ans %> <%= f.radio_button :course_stimulating, ans %>
+      <% end %>
+    </td>
+  </tr>
+
+  <tr>
+    <td align="left"><strong>How approachable was this professor?</strong></td>
+    <td align="left">
+      <% ['1','2','3','4','5','6','7'].each do |ans| %>
+      <%= ans %> <%= f.radio_button :approachability, ans %>
+      <% end %>
+    </td>
+  </tr>
+
+  <tr>
+    <td align="left"><strong>How intellectually stimulating did you find the course?</strong></td>
+    <td align="left">
+      <% ['1','2','3','4','5','6','7'].each do |ans| %>
+      <%= ans %> <%= f.radio_button :course_stimulating, ans %>
+      <% end %>
+    </td>
+  </tr>
+
+  <tr>
+    <td align="left"><strong>If applicable, how effective was this professor at lecturing?</strong></td>
+    <td align="left">
+      <% ['1','2','3','4','5','6','7'].each do |ans| %>
+      <%= ans %> <%= f.radio_button :lead_lecture, ans %>
+      <% end %>
+    </td>
+  </tr>
+
+  <tr>
+    <td align="left"><strong>If applicable, how effective was this professor at promoting discussion?</strong></td>
+    <td align="left">
+      <% ['1','2','3','4','5','6','7'].each do |ans| %>
+      <%= ans %> <%= f.radio_button :promote_discussion, ans %>
+      <% end %>
+    </td>
+  </tr>
+
+  <tr>
+    <td align="left"><strong>How helpful was this professor outside of class?</strong></td>
+    <td align="left">
+      <% ['1','2','3','4','5','6','7'].each do |ans| %>
+      <%= ans %> <%= f.radio_button :outside_helpfulness, ans %>
+      <% end %>
+    </td>
+  </tr>
+  
+  <tr>
+    <td colspan="2">
+      <br>
+      <strong>Comments*</strong>
+      <%= f.text_area :comment, style: "min-height: 100px", placeholder: "Minimum 100 characters" %>
+      <%= f.submit "Save", id: "submit-survey" %>
+    </td>
+  </tr>
+</table>
+<% end %>

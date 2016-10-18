@@ -1,0 +1,22 @@
+<div class="home">
+  <div class="full-width">
+    <header> <!-- Search header area -->
+      <h1 align=center>WSO</h1>
+      <%= render "shared/search" %>
+    </header>
+
+    <!-- Content area -->
+    <article>
+      <section>
+        <!-- discussions box first -->
+        <% [[@threads, link_to("Discussions", discussions_path)],
+            [@announcements, link_to("Announcements", announcements_path)],
+            [@exchanges, link_to("Exchanges", exchanges_path)],
+            [@lostfounds, link_to("Lost + Found", lost_founds_path)],
+            [@jobs, link_to("Jobs", jobs_path)],
+            [@rides, link_to("Rides", rides_path)]].each do |bulls, link| %>
+          <%= render "box", bulls: bulls, link: link %>
+        <% end %>
+      </section>
+    </article>
+  </div> <!-- End .home class wrap -->

@@ -1,0 +1,87 @@
+<div id="comment<%= comment.id%>" class="comment">
+  <div class="comment-content">
+    <h1>
+      <% if (abridged || @course && !@prof) || show_prof %>
+        <%= link_to comment.professor.name, [:factrak, comment.professor] %> |
+      <% end %>
+      <% if comment.course %>
+        <%= link_to comment.course, [:factrak, comment.course] %>
+      <% end %>
+    </h1>
+    
+    <% unless abridged %>
+      <h1>
+        <% commentids = comment.id.to_s %>
+        <span id="<%= commentids + 'agree-count' %>">
+          <%= comment.agrees %>
+        </span> agree,
+        <span id="<%= commentids + 'disagree-count' %>">
+          <%= comment.disagrees %>
+        </span> disagree
+        <!-- Mark this comment as flagged if it is. The span is always here,
+        but it is only filled when it is actually flagged-->
+        <span id="<%= comment.id.to_s + 'flagged'%>"
+         class="factrak-flag"
+         title="Flagged for moderator attention">
+          <% if comment.flagged? %>
+            &#10071;
+          <% end %>
+        </span>
+       <!-- End flag section -->
+      </h1>
+    <% end %>
+
+    <div class="comment-text">
+      <% if abridged %>
+        <%= simple_format(sanitize(comment.comment.truncate(145, :omission => '')), tags: %w(a img br)) %>
+        <% if comment.comment.length > 145 %>
+          <%= link_to('...See More', factrak_professor_path(comment.professor)) %>
+        <% end %>
+
+      <% else %>
+        <%= simple_format(sanitize(comment.comment, tags: %w(a img br))) %>
+        <% if !comment.would_take_another.nil? %>
+          <br>
+          <% if comment.would_take_another? %>
+            I would take another course with this professor
+          <% else %>
+            I would <b>not</b> take another course with this professor
+          <% end %>
+        <% end %>
+        <% if !comment.would_recommend_course.nil? %>
+          <br>
+          <% if comment.would_recommend_course? %>
+            I would recommend this course to a friend
+          <% else %>
+            I would <b>not</b> recommend this course to a friend
+          <% end %>
+        <% end %>
+        <br>
+
+        <% if comment.user_id != current_user.id %>
+          <%= link_to "Agree",    factrak_agreements_path(factrak_survey_id: comment.id, agrees: 1), method: :post, remote: true %>
+          |
+          <%= link_to "Disagree", factrak_agreements_path(factrak_survey_id: comment.id, agrees: 0), method: :post, remote: true %>
+          <% if !abridged && !comment.flagged? %>
+            <span id="flag<%= comment.id %>">
+              | <%= link_to("Flag for moderator attention", "/factrak/flag/?id=" + comment.id.to_s, :remote => true) %>
+            </span>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+
+    <p class="comment-detail">
+      <% if current_user.id == comment.user_id %>
+        <% unless show_prof %>
+          posted by you.
+        <% end %>
+        <%= link_to "edit", edit_factrak_survey_path(comment) %> |
+        <%= link_to "delete", factrak_survey_path(comment), method: :delete, data: { confirm: "Are you sure you want to destroy your review?" } %>
+      <% else %>
+        posted <%= time_ago_in_words(comment.created_at) %> ago.
+      <% end %>
+    </p>
+
+  </div>
+</div>

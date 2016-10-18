@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Class', '% of residents'],
+          ['Seniors', <%= @dorm.students.seniors.count %>],
+          ['Juniors', <%= @dorm.students.juniors.count %>],
+          ['Sophomores', <%= @dorm.students.sophomores.count %>],
+        ]);
+
+      var options = {
+        legend: 'none',
+        chartArea: {'width': '75%', 'height': '80%'},
+        backgroundColor: 'transparent',
+        pieSliceText: 'label',
+        pieSliceTextStyle: {color: 'black', fontSize: 8 },
+      };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="piechart"></div>
+  </body>
+</html>

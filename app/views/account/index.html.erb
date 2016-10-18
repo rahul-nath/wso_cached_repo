@@ -1,0 +1,27 @@
+<header>
+  <div class="page-head">
+    <h2>Logging into WSO</h2>
+    <p>
+      You can log in to any WSO web service with your OIT username and password (these 
+      are what you use to access your Williams email). Some web services also allow 
+      you to log in with a WSO account or an alumni account.
+    </p>
+    <% if session[:login] %>
+      <p>You are logged in as <strong><%= current_login %></strong>.</p>
+    <% else %>
+      <p>You can log in <%= link_to "here", account_login_path %>.</p>
+    <% end %>	
+  </div>
+
+  <% if false %>
+    <article>
+      <% if current_user.nil? %>
+	<h2>Editing your WSO facebook profile</h2>
+	<p>To edit your WSO facebook profile, you must log in using your
+	  OIT username (Unix ID). If you add your WSO username to your profile, you will subsequently
+	  be able to edit your account when logged in with your WSO username. Currently, alumni
+	  account profiles are not supported.</p>
+      <% end %>
+    </article>
+  <% end %>
+</header>

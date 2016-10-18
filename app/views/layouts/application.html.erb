@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>WSO: <%= random_wso %></title>
+  <%= stylesheet_link_tag    "css/i.css", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+
+  <%= csrf_meta_tags %>
+  <link rel="stylesheet" href="//brick.a.ssl.fastly.net/Source+Sans+Pro:300,300i,400,400i,600,600i,700,700i">
+  <%= yield :head%>
+</head>
+
+<body class="<%= yield (:body_class) %>">   
+    <nav>
+      <div class="nav-container">
+        <ul class="nav-left">
+          <li><%= link_to "Home", "/" %></li>
+          <li><%= link_to "Facebook", "/facebook" %></li>
+          <li><%= link_to "Factrak", "/factrak" %></li>
+          <li><%= link_to "Dormtrak", "/dormtrak" %></li>
+          <li><%= link_to "Listserv", "/about/listserv" %></li>
+          <li><%= link_to "Wiki", "/wiki" %></li>
+          <li><%= link_to "About", "/about" %></li>
+        </ul>
+	
+        <ul class="nav-right">
+        <% unless current_user.nil? %>
+          <li class="avatar">
+          <% if current_user %>
+            <%= link_to facebook_pic(current_user.unix_id, 30, 40), [current_user] %>
+          <% end %>
+
+          </li>
+          <li><%= link_to "Logout", "/account/logout" %></li>
+        <% else %>
+          <li><%= link_to "Login", "/account/login" %></li>
+        <% end %>
+        </ul>
+      </div>
+    </nav>
+
+    <aside>
+      <% if flash[:notice] %>
+        <section class="notice"><%= flash[:notice] %></section>
+      <% end %>
+    </aside>
+
+    <header>      
+      <%= yield :header%>      
+    </header>
+    
+    <%= yield %>
+    
+  <footer>
+    <section>
+      <small>&copy;2015 <a href="#">Williams Students Online</a></small>
+    </section>
+  </footer>
+</body>
+</html>

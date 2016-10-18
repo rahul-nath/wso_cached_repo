@@ -1,0 +1,32 @@
+<div class="grid-wrap">
+  <% @results.each do |user| %>
+  <aside> <!-- Profile Module -->
+    <div class="third">
+      <div class="profile-photo">
+	<%= link_to facebook_pic(user.unix_id, 105, 135), user %>
+      </div>
+    </div>
+    <div class="two-third">
+      <h4> <%= link_to user.name, user %> </h4>
+      <ul>
+	<% if user.unix_id and user.email%>
+	<li class="list-headers">UNIX</li>
+   	<li class="list-contents"><%= mail_to user.email, user.unix_id %></li>
+	<% end %>
+	
+	<% if user.room_string and (!user.student? or user.dorm_visible?) %>
+	<!-- we don't allow prof/faculty to hide their office :) -->
+	<li class="list-headers">
+	  <% if user.student? %>
+	  Room:
+	  <% else %>
+	  Office:
+	  <% end %>
+	</li>
+	<li class="list-contents"><%= user.room_string %></li>
+	<% end %>
+      </ul>
+    </div>
+  </aside>        
+  <% end %>
+</div>

@@ -1,0 +1,69 @@
+/* 
+ * Facebook profile
+ * - viewing and editing
+ * - also used by Factrak
+ */
+
+.facebook-profile, .facebook-edit {
+  section {
+    @extend %border-wrap;
+  }
+  .name {
+    margin: .25em 0;
+    margin-bottom: 3rem; // 2x base-line-height
+  }
+  .picture {
+    @include span-columns(3);
+    // mobile
+    @include media($small-screen) {
+      @include span-columns($ss-full);
+    }
+    img {
+      @include br($border);
+      width: 100% !important;
+      height: auto !important;
+    }
+
+    a {
+      @include button($purple);
+      width: 100%;
+      text-align: center;
+    }
+  }
+  .info {
+    @include span-columns(8);
+    @include shift(1);
+    @include omega();
+    // mobile
+    @include media($small-screen) {
+      @include span-columns($ss-full);
+    }
+    a {
+      color: $purple;
+    }
+    h3 {
+      color: $black;
+      margin: 0;
+      span {
+	color: $medium-gray;
+      }
+    }
+    h5,h4 {
+      margin: 0;
+      @extend %all-caps;
+      font-weight: bold;
+    }
+    h5 {
+      color: $medium-gray;
+    }
+    h4 {
+      color: $black;
+      font-size: $base-font-size;
+    }
+    .save {
+      @include button($purple);
+      font-weight: bold;
+      float: right;
+    }
+  }
+}

@@ -1,0 +1,34 @@
+<% room = @review.dorm_room %>
+<% dorm = @review.dorm %>
+
+
+<div class="article"><section><article>
+  <h3>Editing review for
+    <%= dorm.name + " " + room.number %>
+  </h3>
+  <%= link_to "Delete review", @review, method: :delete, data: { confirm: "Are you sure you want to delete your review?" } %>
+  <br><br>
+
+  <%= form_for(@review) do |f| %>
+    <strong>What are the main causes of the noise?</strong>
+    <% if !room.noise.nil? %>
+      <% placeholder = room.noise %>
+    <% else %>
+      <% placeholder = nil %>
+    <% end %>
+    <%= f.text_area(:noise, placeholder: placeholder,
+        cols: 40, rows: 2) %>
+
+    <strong>General commentary on <%= dorm.name %> itself:</strong><br>
+    (not your room!)
+    <% if !@review.comment.nil? %>
+      <% placeholder = @review.comment %>
+    <% else %>
+      <% placeholder = "Share your thoughts, likes, dislikes, things to be aware of, etc..." %>
+    <% end %>
+    <%= f.text_area(:comment, placeholder: placeholder, rows: 5, cols: 40 ) %>
+    <br>
+
+    <%= f.submit "Update" %>
+  <% end %>
+</div></section></article>

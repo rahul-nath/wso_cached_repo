@@ -1,0 +1,11 @@
+<div class="article"><section><article>
+<% if @surveys.empty? %>
+  <h1 class="no-matches-found">No reviews yet.</h1>
+<% else %>
+  <h3>Your Reviews</h3>
+  <br>
+  <% @surveys.each do |survey| %>
+    <%= render "factrak/shared/comment", comment: survey, show_prof: true, abridged: false %>
+  <% end %>
+<% end %>
+</article></section></div>

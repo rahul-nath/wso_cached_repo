@@ -1,0 +1,51 @@
+<article class="factrak-home">
+  <section class="margin-vertical-small">
+    <h3><%= @area_of_study.name %></h3>
+    <% unless @professors.empty? %>
+      <br>
+      <h4>Professors in <%= @area_of_study.department.name %></h4>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Title</th>
+            <th class="unix-column">Unix</th>            
+          </tr>
+        </thead>
+        <tbody>
+          <% @professors.each do |prof| %>
+              <tr>
+                <td><%= link_to prof.name_string, [:factrak, prof] %></td>
+                <td><%= prof.title %></td>
+                <td><%= mail_to prof.email, prof.unix_id %></td>
+              </tr>
+          <% end %>
+        </tbody>
+      </table> 
+    <% end %>
+  </section>
+
+  <section class="margin-vertical-small">
+    <h4>Courses</h4>
+    <table>
+      <thead>
+        <tr>
+          <th class="col-20">Course</th>
+          <th class="col-80">Professors</th>
+        </tr>
+      </thead>
+      <tbody>
+     	  <% @area_of_study.courses.sort {|x,y| x.number <=> y.number}.each do |course| %>
+          <tr>
+            <td class="col-20"><%= link_to course, [:factrak, course] %> </td>
+            <td class="col-80">
+              <% course.professors.each do |p| %>
+                <%= link_to p.name, [:factrak, course, prof: p] %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table> 
+  </section>
+</article>

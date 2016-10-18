@@ -1,0 +1,128 @@
+<!--- table shit by matt. no idea what i'm doing -->
+<article class="home">
+  <table class="fact-table">
+    <tr>
+      <h3>Facts</h3>
+    </tr>
+
+    <% if @dorm.neighborhood.name != "First-year" %>
+    <tr>
+      <strong>Class breakdown</strong>:
+      <%= render 'student_breakdown' %>
+    </tr>
+    <% end %>
+
+    <tr>
+      <strong>Seniors</strong>: 
+      <%= @dorm.students.seniors.count %><br>
+    </tr>
+
+    <tr>
+      <strong>Juniors</strong>: 
+      <%= @dorm.students.juniors.count %><br>
+    </tr>
+
+    <tr>
+      <strong>Sophomores</strong>: 
+      <%= @dorm.students.sophomores.count %><br>
+    </tr>
+    
+    <tr>
+      <strong>Capacity</strong>:
+      <%= @dorm.capacity %><br>
+    </tr>
+    
+    <tr>
+      <strong>Singles</strong>:
+      <%= @dorm.number_singles %><br>
+    </tr>
+    
+    <tr>
+      <strong>Mean Single Size</strong>:
+      <%= @dorm.average_single_area %> sq. ft. <br>
+    </tr>
+
+    <tr>
+      <strong>Most Common Single Size</strong>:
+      <%= @dorm.mode_single_area %> sq. ft. <br>
+    </tr>
+    
+    <tr>
+      <strong>Biggest Single</strong>:
+      <% r = @dorm.biggest_single %>
+      <%= link_to r.number, [:dormtrak, @dorm, number: r.number] %>  <br>
+    </tr>
+
+    <tr>
+      <strong>Smallest Single</strong>:
+      <% r = @dorm.smallest_single %>
+      <%= link_to r.number, [:dormtrak, @dorm, number: r.number] %>  <br>
+    </tr>
+
+    <tr>
+      <strong>Doubles</strong>: 
+      <%= @dorm.number_doubles %><br>
+    </tr>
+    
+    <% if @dorm.number_doubles > 0 %>
+    <tr>
+      <strong>Mean Double Size</strong>: 
+      <%= @dorm.average_double_area %> sq. ft. <br>
+    </tr>
+    
+    <tr>
+      <strong>Most Common Double Size</strong>:
+      <%= @dorm.mode_double_area %> sq. ft. <br>
+    </tr>
+
+    <tr>
+      <strong>Biggest Double</strong>:
+      <% r = @dorm.biggest_double %>
+      <%= link_to r.number, [:dormtrak, @dorm, number: r.number] %>  <br>
+    </tr>
+
+    <tr>
+      <strong>Smallest Double</strong>:
+      <% r = @dorm.smallest_double %>
+      <%= link_to r.number, [:dormtrak, @dorm, number: r.number] %>  <br>
+    </tr>
+    <% end %>
+
+    <tr>
+      <strong>Student-bathroom ratio</strong>: 
+      <%= @dorm.bathroom_ratio.round(2) %>:1 <br>
+    </tr>
+    
+    <tr>
+      <strong>Common rooms</strong>: 
+      <%= @dorm.common_room_access %><br>
+    </tr>
+    
+    <% if !@dorm.key_or_card.nil? %>
+    <tr>
+      <strong>Open room with</strong>: 
+      <%= @dorm.key_or_card %><br>
+    </tr>
+    <% end %>
+    
+    <tr>
+      <strong>Washers</strong>: 
+      <%= @dorm.number_washers %> <br>
+    </tr>
+
+    <tr>
+      <strong>Average Ratings for</strong>:
+    </tr>
+    <br>
+    <% ["wifi", "location", "loudness", 
+       "satisfaction"].each do |attr| %>
+      <% if !@dorm[attr].nil? %>
+      <tr>
+      	&nbsp<%= attr.titleize %>: <%= @dorm[attr] %>
+      </tr><br>
+      <% end %>
+    <% end %>
+
+  </table>
+</article>
+

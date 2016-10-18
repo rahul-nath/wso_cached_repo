@@ -1,0 +1,44 @@
+<article class="facebook-profile">
+  <section class="info">
+    <%#= link_to @course.department.name, department_path(@course.department) %>
+
+    <h3><%= @course %></h3>
+
+    <div>
+      <% if @professor %>
+	<h4><%= link_to(@professor.name, professor_path(@professor)) %></h4>
+	<br>
+	<% unless @course.professors.empty? %>
+	  <% if @course.professors.size == 1 %>
+	    We don't have comments for this class taught by other professors.
+	  <% else %>
+	    View comments for <br>
+	    <%= link_to "All Professors", [:factrak, @course] %> &nbsp &nbsp
+
+	    <% @course.professors.where.not(id: @professor.id).each do |p| %>
+	      <%= link_to p.name, [:factrak, @course, prof: p] %> &nbsp &nbsp
+	    <% end %>
+	  <% end %>
+	<% end %>
+      <% else %>
+	<br>
+	<% unless @course.professors.empty? %>
+	  View comments only for <br>
+	  <% @course.professors.each do |professor| %>
+	    <%= link_to professor.name, [:factrak, @course, prof: professor] %> &nbsp &nbsp
+	  <% end %>
+	<% end %>
+      <% end %>
+    </div>
+    <br>
+    <div class="factrak-prof-comments">
+      <% if @comments.nil? %>
+	None yet.
+      <% else %>
+	<% @comments.each do |comment| %>
+	  <%= render "factrak/shared/comment", comment: comment, abridged: false, show_prof: true %>
+	<% end %>
+      <% end %>
+    </div>
+  </section>
+</article>

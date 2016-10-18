@@ -1,0 +1,13 @@
+<% if @post.errors.any? %>
+   var errs = document.getElementById("errors");
+   errs.innerHTML = "";
+   <% @post.errors.full_messages.each do |msg| %>
+      errs.innerHTML += "<p>*<%= msg %></p>";
+   <% end %>
+<% else %>
+   var comSect = document.getElementById("discussions-comments-section");
+   var reply = document.createElement("div");
+   comSect.appendChild(reply);
+   reply.innerHTML = "<%= j render 'bulletins/discussions/post', p: @post %>";
+   document.getElementById("post_content").value = "";
+<% end %>

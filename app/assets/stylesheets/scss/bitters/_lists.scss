@@ -1,0 +1,121 @@
+/* Default List
+************************************************/
+
+ul, ol {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+
+  &%default-ul {
+    list-style-type: disc;
+    margin-bottom: $base-line-height / 2;
+    padding-left: $base-line-height;
+  }
+
+  &%default-ol {
+    list-style-type: decimal;
+    margin-bottom: $base-line-height / 2;
+    padding-left: $base-line-height;
+  }
+}
+
+dl {
+  line-height: $base-line-height;
+  margin-bottom: $base-line-height / 2;
+
+  dt {
+    font-weight: bold;
+    margin-top: $base-line-height / 2;
+  }
+
+  dd {
+    margin: 0;
+  }
+}
+
+.article {
+  ul {
+    @extend %default-ul;
+  }
+  ol {
+    @extend %default-ol;
+  }
+}
+
+/* Custom Lists
+************************************************/
+
+// Nav Link Style Lists, Inline, etc.
+%link-list {
+  ul {
+    list-style-type: none;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    li {
+      display: inline-block;
+      color: white;
+      font-weight: bold;
+      letter-spacing: 1px;
+      list-style: 1px;
+      font-size: $base-font-size-small;
+      text-transform: uppercase;
+      margin-right: 2em;
+      // Remove margin on last list-item
+      &:last-child {
+        margin-right: 0;
+      }
+      a {
+        color: $purple;
+      }
+    }
+  }
+}
+
+// Bordered, Formatted List
+%bordered-list {
+    // Header
+    h5 {
+        color: white;
+        font-weight: bold;
+        background: $purple;
+        text-align: center;
+        padding: 1rem .5rem;
+        border-bottom: 2px solid $light-gray;
+        @include border-top-radius(2px);
+        // Phone
+        @include media($small-screen) {
+          padding: 1em .25em;
+        }
+      }
+    // Lists
+    ul {
+      @include br(4px);
+      // List items
+      li {
+        padding: 1em;
+        // Phone
+        @include media($small-screen) {
+          padding: .5em 1em;
+        }
+        // Borders
+        -webkit-box-shadow :inset  2px -2px 0 $light-gray,
+                            inset -2px   0 0 $light-gray; 
+        box-shadow : inset  2px -2px 0 $light-gray,
+                     inset -2px   0 0 $light-gray; 
+        // Links
+        a {
+          color: $purple;
+        }
+        // List pseudo-selectors
+        // Change bg on evens
+        &:nth-child(even) {
+          background: $off-white;
+        }
+        // Bottom radius for last list item
+        &:last-child {
+          @include border-bottom-radius(2px);
+        }
+      }
+    }
+}

@@ -1,0 +1,7 @@
+<div class="article"><section><article>
+  <h3>Editing review on <%= "#{@dept_abbrev} #{@course_num} with" if @survey.course %> <%= @prof.name %> 
+  </h3>
+  <%= link_to "Delete review", @survey, method: :delete, data: { confirm: "Are you sure you want to delete your review?" } %>
+
+  <%= render "factrak/shared/survey_form", remote: false %>
+</article></section></div>

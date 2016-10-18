@@ -1,0 +1,28 @@
+<article class="facebook-results">
+  <section>
+    <% if @dorms.empty? %>
+      <br>
+      <h1 class="no-matches-found">
+        No matches were found.
+      </h1>
+    <% else %>
+      <table>
+	<thead>
+	  <tr>
+	    <th>Building</th>
+	    <th>Neighborhood</th>
+	  </tr>
+	</thead>
+	<tbody>
+	  <% @dorms.each do |dorm| %>
+	    <tr>
+	      <td><%= link_to dorm.name, [:dormtrak, dorm] %></td>
+	      <% n = dorm.neighborhood %>
+	      <td><%= link_to n.name, [:dormtrak, n] %></td>
+	    </tr>
+          <% end %>
+	</tbody>
+      </table>
+    <% end %>
+  </section>
+</article>

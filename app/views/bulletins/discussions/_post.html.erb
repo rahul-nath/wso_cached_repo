@@ -1,0 +1,32 @@
+<div id="p<%= p.id %>" class="comment">
+  <% if !p.deleted? %>
+  <div class="comment-image">
+    <!--%= facebook_pic(p.user.unix_id) %-->
+  </div>
+  <div class="comment-content">
+    <b>
+      <% if p.user %>
+      <%= link_to p.user.name, "/facebook/view/" + p.user.unix_id %>
+      <% else %>
+      <%= p.ex_user_name %>
+      <% end %>
+    </b>
+    &nbsp;
+    <em>
+      <%= p.created_at.strftime("%B %d, %Y") %>
+    </em>
+    <br><br>
+    <% if !p.deleted? %>
+      <%= simple_format(sanitize(p.content, 
+	  tags: %w(a img br blockquote cite))) %>
+    <% end %>
+  </div>
+  <div>
+    <% if p.user == current_user || current_user.admin? %>
+    <%= link_to("X", post_path(p), :method => :delete, :remote => true,
+                :title => "Delete", :confirm => "Are you sure?")%>
+    <%= link_to("Edit", edit_post_path(p), :remote => true, :title => "Edit") %>
+    <% end %>
+  </div>
+  <% end %>
+</div>

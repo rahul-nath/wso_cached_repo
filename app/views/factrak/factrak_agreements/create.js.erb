@@ -1,0 +1,17 @@
+/**
+ * This will update agreements/disagreements based @agreement.errors.any?
+ * and @agreement.agrees?
+ * -Matt
+ */
+
+
+if (<%= @agreement.errors.any? %>) {
+   /* Render the error message. Currently, it operates under the assumption
+      that the only possible error is that they've already agreed with it.
+      So for the moment at least, I'm just gonna ignore this. */
+   
+} else {
+   var id = "<%= @agreement.factrak_survey_id %>";
+   document.getElementById(id + "disagree-count").innerHTML = "<%= @survey.disagrees %>";
+   document.getElementById(id + "agree-count").innerHTML = "<%= @survey.agrees %>";
+}

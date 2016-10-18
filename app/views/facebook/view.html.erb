@@ -1,0 +1,104 @@
+<% content_for :search_bar do %>
+    <%= form_tag('/facebook') do -%>
+	<%= search_field_tag 'search', nil, placeholder: "Enter a search term" %>
+	<%= submit_tag "Search", class: "submit" %>
+	<% if @searched %>
+	    <div class="toggles">
+		<!--
+		     <%= toggle_option("auto", true) %> 
+		     <%= toggle_option("list") %> 
+		     <%= toggle_option("grid") %> 
+		   -->
+	    </div>
+	<% end %>
+    <% end %>
+<% end %>
+
+<% unless flash[:notice] %>
+<script>
+  $(function() {
+     $(document).scrollTop( $("#personstart").offset().top );  
+  });
+</script>
+<% end %>
+
+<article class="facebook-profile">
+  <section>
+    <aside>
+      <strong><%= notice %></strong>
+    </aside>
+    <a id="personstart"></a>
+
+    <aside class="picture">
+      <%= facebook_pic( @view_person.unix_id, 150, 200 ) %>
+      <% if current_user and current_user.admin? %>
+      Admin:
+      <%= link_to "Edit this user", :controller => "account", :action => "edit", :params => {:unix => @view_person.unix_id} %>
+      <% end %>
+    </aside>
+    <aside class="info">
+
+      <h3>
+        <%= @view_person.name_string %>
+        <% if current_user == @view_person %>
+        <span>(me)</span>
+        <% end %>
+      </h3>
+
+      <% if @view_person.student? %>
+      <h5>
+        Student
+        <% if @view_person.major and !@view_person.major.match(/^(Z|None)/) %>
+        <%= "(#{@view_person.major_list} Major)" %>
+        <% end %>
+      </h5>
+      <% else %>
+      <h5>
+        <% if @view_person.title %>
+        <%= @view_person.title %><br /></span>
+        <% end %>
+        <%= @view_person.department %>
+      </h5>
+      <% end %>
+
+      <br>
+      
+      <% if @view_person.unix_id %>
+      <h5>Unix:</h5>
+      <h4><%= @view_person.unix_id %></h4>
+      <% end %>
+      <br>
+      
+      <% if @view_person.student? %>
+      <h5>SU Box:</h5>
+      <h4><%= @view_person.su_box || "None listed" %></h4>
+      <br>
+      <% end %>
+
+      <% cell_phone = @view_person.cell_phone %>
+      <% if cell_phone and !cell_phone.empty? %>
+      <h5>Cell Phone:</h5>
+      <h4><%= @view_person.cell_phone %></h4>
+      <br>
+      <% end %>
+
+      <% if @view_person.student? %>
+        <% if @view_person.dorm_visible? != false %>
+          <h5>Room:</h5>
+	  <h4><%= @view_person.room_string %></h4>
+	<% end %>
+      <% else %>
+        <h5>Office:</h5>
+        <h4><%= @view_person.room_string %></h4>
+      <% end %>
+      <br>
+
+      <% # This will stay this way until we sort out the address thing in ldap %>
+      <% if false && @view_person.student? and @view_person.home_visible? and @view_person.home_address %>
+      <h5>Home Address:</h5>
+      <h4><%= @view_person.home_address.slice(0..(@view_person.home_address.index('<') - 1)) %></h4>
+      <h4><%= @view_person.home_address.slice((@view_person.home_address.index('>') + 1)..-1) %></h4>
+      <% end %>
+    </aside>
+  </section>
+</article>

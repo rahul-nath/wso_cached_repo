@@ -1,0 +1,178 @@
+/* Things that are on every page:
+ * - header
+ * - navigation
+ * - footer
+ *
+ */
+
+// Header
+header {
+    @extend %container;
+    @include clearfix();
+    // form
+    form {
+	@include span-columns(11); // 11 of 12 total columns
+	@include shift(1);
+	
+	// Tablet
+	@include media($medium-screen) {
+	    @include span-columns(8); // 8 of 8 total columns
+	    @include shift(0);  
+	}
+	// Phone
+	@include media($small-screen) {
+	    @include span-columns(4); // 4 of 4 total cols
+	} 
+    }
+    //toggles
+    .toggles {
+	@extend form;
+	@include media($small-screen) {
+	    margin-top: $base-line-height;
+	}
+    }
+
+    // Search Form Entry
+    input[type="search"] {
+	@include span-columns(8); // 8 of 11 cols in form
+	// Tablet
+	@include media($medium-screen) {
+	    @include span-columns(5); // 5 of 8 cols in form
+	}
+	// Phone
+	@include media($small-screen) {
+	    @include span-columns(4); // 4 of 4 total cols 
+	}
+    }
+    // Search Form Entry
+    input[type="password"], input[type="email"] {
+	@include span-columns(11 of 11); // 8 of 11 cols in form
+	// Tablet
+	@include media($medium-screen) {
+	    @include span-columns(8 of 8); // 5 of 8 cols in form
+	}
+	// Phone
+	@include media($small-screen) {
+	    @include span-columns(4 of 4); // 4 of 4 total cols 
+	}
+    }
+
+    // Search Submit Button
+    .submit {
+	@include span-columns(3);
+	@include omega();
+	
+	// Tablet
+	@include media($medium-screen) {
+	    @include span-columns(3);
+	    @include omega();  
+	}
+	// Phone
+	@include media($small-screen) {
+	    @include span-columns(4);
+	} 
+    }
+} // End header
+
+/* Site Navigation Bar
+ ************************************************/
+nav {
+    width: 100%;
+    @include clearfix;
+    background: $blue-black;
+    padding: 0;
+    //height: em(80); don't define a height while it still overflows
+    .nav-container {
+	@extend %container;
+    }
+    ul {
+	line-height: 3em;
+	text-align: right;
+	@include span-columns(3); // 3 of 12 total cols
+	@include omega();
+	@include media($medium-screen) {
+	    @include span-columns(1);
+	    @include omega();
+	}
+	// first list on the left
+	&:first-of-type {
+	    text-align: left;
+	    @include span-columns(7); // 7 of 12 total cols
+	    @include shift(1);        // 2 of 12 total cols
+	    // Tablet
+	    @include media($medium-screen) {
+		@include span-columns(7);
+		@include shift(0);
+	    }
+	} 
+    }
+    // List Styling
+    li {
+	display: inline-block;
+	color: $white;
+	font-weight: 600;
+	letter-spacing: 1px;
+	list-style: 1px;
+	font-size: $base-font-size;
+	text-transform: uppercase;
+	margin-right: 2rem;
+	font-size: $base-font-size-small;
+	// Phones
+	@include media($small-screen) {
+	    margin-right: 1em;
+	}
+	// Remove last margin
+	&:last-child {
+	    margin-right: 0;
+	}
+	// Links
+	a {
+	    text-decoration: none;
+	    border-bottom: none;
+	    color: $white;  
+	    &:hover {
+		color: $white;
+	    }
+	}
+    }
+}
+
+// Footer
+footer {
+    @extend %full-width;
+    background: $blue-black;
+    color: $white;
+    height: 6rem;
+    color: $white;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    // Container
+    section {
+	@include outer-container;
+	padding-top: 2em !important;
+	margin-bottom: 0 !important;
+	small {
+	    opacity: .75;
+	    line-height: 3em;
+	    @include user-select(none);
+	    text-align: center;
+	    color: white;
+	    @include span-columns(12);
+	    @include clearfix;
+	    // Tablet
+	    @include media($medium-screen) {
+		@include span-columns(8);   
+	    }
+	    // Phone
+	    @include media($small-screen) {
+		@include span-columns(4);
+	    }   
+	    // Link
+	    a {
+		color: white;
+		border-bottom: 1px solid transparentize($white, .88);
+	    }
+	}
+    }
+}

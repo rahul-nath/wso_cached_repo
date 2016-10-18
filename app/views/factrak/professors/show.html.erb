@@ -1,0 +1,44 @@
+<script>
+  <% unless flash[:notice] %>
+    $(function() {
+      $(document).scrollTop( $("#fbprof").offset().top );
+    });
+  <% end %>
+
+  function showSurvey() {
+    $("#survey-section").load("<%= new_factrak_survey_path(professor_id: @prof.id) %>");
+  }
+</script>
+
+<article class="facebook-profile" id="fbprof">
+  <!-- Profile section -->
+  <section class="info">
+    <h3><%= @prof.name_string %></h3>
+
+    <h5>
+      <%= @prof.department.name %><br>
+      <% if @prof.title %>
+        <span><%= @prof.title %></span>
+      <% end %>
+    </h5>
+    <br>
+
+    <br>
+    <%= link_to "Click here to review this professor", new_factrak_survey_path(professor_id: @prof.id) %>
+    <br><br>
+    
+    <h3>Comments</h3>
+    <br>
+    <div id="factrak-comments-section">
+      <% if @prof.surveys.empty? %>
+        No comments yet.
+      <% else %>
+        <% if @comments.any? %>
+          <% @comments.each do |comment| %>
+            <%= render "factrak/shared/comment", comment: comment, show_prof: false, abridged: false %>
+          <% end %>
+        <% end %>
+      <% end %>
+    </div>
+  </section>
+</article>

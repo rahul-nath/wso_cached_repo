@@ -1,0 +1,28 @@
+<% unless @results.empty? %>
+<table>
+   <thead>
+      <tr>
+         <th>Name</th>
+         <th class="unix-column">Unix</th>
+         <th>Room/Office</th>
+      </tr>
+   </thead>
+   <tbody>
+   <% @results.each do |user| %>
+     <tr>
+       <td>
+         <%= link_to user.name_string, user %>
+       </td>
+			 <td><% if user.unix_id && user.email%>
+         <%= mail_to user.email, user.unix_id %>
+       <% end %></td>
+       <td>
+			 <% if user.room_string %>
+         <%= user.room_string %>
+       <% end %>
+       </td>
+     </tr>
+   <% end %>
+   </tbody>
+</table> 
+<% end %>

@@ -1,0 +1,32 @@
+<% content_for :header do %>
+
+  <% content_for :body_class, "dormtrak" %>
+  <div class="page-head">
+    <h1><%= link_to "Dormtrak", "/dormtrak" %></h1>
+    <ul>
+      <li><%= link_to 'Home', '/dormtrak' %></li>
+      <% if current_user.try(:dorm) %>
+        <% if r = current_user.has_reviewed_room? %>
+          <li><%= link_to 'Edit Survey', edit_dormtrak_review_path(r) %></li>
+        <% else %>
+          <li><%= link_to 'Survey', new_dormtrak_review_path %></li>
+        <% end %>
+      <% end %>
+      <li><%= link_to 'Policy', '/dormtrak/policy' %></li>
+      <li><%= link_to 'OSL', 'http://student-life.williams.edu', title: "Office of Student Life" %></li>
+      <% Neighborhood.all.each do |n| %>
+        <% if !n.first_year? && !n.coop? %>
+          <li><%= link_to( n.name, [:dormtrak, n], title: n.name + " Neighborhood dorms") %></li>
+        <% end %>
+      <% end %>
+    </ul>
+  </div>
+
+  <!-- Search Block -->
+  <%= form_tag [:dormtrak, :search, method: :get] do %>
+    <%= search_field_tag :search, params[:search], :placeholder => "Enter all or part of a building's name" %>
+    <%= submit_tag "Search", class: 'submit' %>
+  <% end %>
+
+<% end %>
+<%= render template: "layouts/application" %>

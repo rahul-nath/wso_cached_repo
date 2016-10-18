@@ -1,0 +1,49 @@
+<article class="list-creation">
+  <section>
+    <%= form_for current_user do |f| %>
+      <div class="field">
+	<h3>Profile Picture</h3>
+	Must smaller than 1024x1024. Will be cropped automatically to 150x200
+	<br><br>
+	<%= f.file_field :pic_file %>
+      </div>
+      
+      <br><br>
+      
+      <div class="field">
+	<h3>Visibility Settings</h3>
+	Preselected values indicate current settings
+	<br><br>
+	
+	<strong>
+	  Facebook profile:
+	</strong>
+	<br>
+	Show <%= f.radio_button :visible, 1, checked: current_user.visible? %>
+	Hide <%= f.radio_button :visible, 0, checked: !current_user.visible? %>
+	<br><br>
+	
+	<strong>
+	  Home Address:
+	</strong>
+	<br>
+	Show <%= f.radio_button :home_visible, 1, checked: current_user.home_visible? %>
+	Hide <%= f.radio_button :home_visible, 0, checked: !current_user.home_visible? %>
+	<br><br>
+	
+	<% if current_user.student? %>
+	  <strong>
+	    Dorm Address:
+	  </strong>
+	  <br>
+	  Show <%= f.radio_button :dorm_visible, 1, checked: current_user.dorm_visible? %>
+	  Hide <%= f.radio_button :dorm_visible, 0, checked: !current_user.dorm_visible? %>
+	<% end %>
+	<br><br>
+	
+	<%= f.submit "Save changes" %>
+      </div>
+      
+    <% end %><!-- end form -->
+  </section>
+</article>

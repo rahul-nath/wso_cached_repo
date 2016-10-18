@@ -1,0 +1,28 @@
+<article class="facebook-results">
+  <section>
+    <table>
+      <thead>
+	<tr>
+	  <th>Building</th>
+	  <th>Singles</th>
+	  <th>Doubles</th>
+	  <th>Seniors</th>
+	  <th>Juniors</th>
+	  <th>Sophomores</th>
+	</tr>
+      </thead>
+      <tbody>
+	<% @neighborhood.dorms.each do |dorm| %>
+	  <tr>
+	    <td><%= link_to dorm.name, [:dormtrak, dorm] %></td>
+	    <td><%= dorm.number_singles %></td>
+	    <td><%= dorm.number_doubles %></td>
+	    <td><%= dorm.students.seniors.count %></td>
+	    <td><%= dorm.students.juniors.count %></td>
+	    <td><%= dorm.students.sophomores.count %></td>
+	  </tr>
+	<% end %>
+      </tbody>
+    </table>
+  </section>
+</article>
